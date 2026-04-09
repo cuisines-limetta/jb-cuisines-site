@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JB Cuisines — Cuisiniste artisan sur mesure</title>
+  <meta name="description" content="Conception, fabrication et pose de cuisines haut de gamme entièrement sur mesure. Cuisiniste artisan passionné, à votre service.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__container">
+      <a href="#hero" class="nav__logo">
+        <img src="/logo%20minimaliste%20vectoris%C3%A9.svg" alt="JB Cuisines">
+      </a>
+      <ul class="nav__links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#realisations">Réalisations</a></li>
+        <li><a href="#a-propos">À propos</a></li>
+        <li><a href="#contact" class="nav__cta">Devis gratuit</a></li>
+      </ul>
+      <button class="nav__burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#realisations">Réalisations</a></li>
+        <li><a href="#a-propos">À propos</a></li>
+        <li><a href="#contact">Devis gratuit</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero scroll-scrubbing wrapper -->
+  <div class="hero-scroll-wrapper" id="hero-wrapper">
+  <section class="hero" id="hero">
+    <div class="hero__video-wrap">
+      <!-- Vidéo visible pendant l'extraction des frames -->
+      <video class="hero__video" id="hero-video" muted autoplay loop playsinline preload="auto">
+        <source src="/Je_veux_que_lamnagement_intrie_Kling_30__14193.mp4" type="video/mp4">
+      </video>
+      <!-- Canvas affiché une fois les frames prêtes -->
+      <canvas class="hero__canvas" id="hero-canvas"></canvas>
+      <div class="hero__overlay"></div>
+      <!-- Étapes du projet — apparaissent progressivement au scroll -->
+      <div class="hero-steps" id="hero-steps" aria-hidden="true">
+        <div class="hero-step" data-step="0">
+          <div class="hero-step__marker">
+            <div class="hero-step__dot"></div>
+            <div class="hero-step__line"></div>
+          </div>
+          <div class="hero-step__body">
+            <span class="hero-step__num">01</span>
+            <h3 class="hero-step__title">Étude du besoin</h3>
+            <p class="hero-step__desc">Visite à domicile, analyse de votre espace et de vos envies pour définir ensemble le projet idéal.</p>
+          </div>
+        </div>
+        <div class="hero-step" data-step="1">
+          <div class="hero-step__marker">
+            <div class="hero-step__dot"></div>
+            <div class="hero-step__line"></div>
+          </div>
+          <div class="hero-step__body">
+            <span class="hero-step__num">02</span>
+            <h3 class="hero-step__title">Conception 3D</h3>
+            <p class="hero-step__desc">Plans et rendus 3D photo-réalistes pour visualiser votre future cuisine avant toute fabrication.</p>
+          </div>
+        </div>
+        <div class="hero-step" data-step="2">
+          <div class="hero-step__marker">
+            <div class="hero-step__dot"></div>
+            <div class="hero-step__line"></div>
+          </div>
+          <div class="hero-step__body">
+            <span class="hero-step__num">03</span>
+            <h3 class="hero-step__title">Fabrication & Pose</h3>
+            <p class="hero-step__desc">Fabrication sur mesure et installation soignée par nos artisans, dans les délais convenus.</p>
+          </div>
+        </div>
+        <div class="hero-step" data-step="3">
+          <div class="hero-step__marker">
+            <div class="hero-step__dot"></div>
+            <div class="hero-step__line"></div>
+          </div>
+          <div class="hero-step__body">
+            <span class="hero-step__num">04</span>
+            <h3 class="hero-step__title">SAV & Garanties</h3>
+            <p class="hero-step__desc">Garantie décennale et service après-vente réactif pour votre tranquillité d'esprit sur le long terme.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pastilles de progression des étapes -->
+      <div class="hero-steps-progress" id="hero-steps-progress">
+        <div class="hero-steps-progress__dot"></div>
+        <div class="hero-steps-progress__dot"></div>
+        <div class="hero-steps-progress__dot"></div>
+        <div class="hero-steps-progress__dot"></div>
+      </div>
+
+      <!-- Indicateur de chargement -->
+      <div class="hero-loading" id="hero-loading">
+        <div class="hero-loading__track">
+          <div class="hero-loading__bar" id="hero-loading-bar"></div>
+        </div>
+        <span class="hero-loading__label">Préparation de l'expérience…</span>
+      </div>
+    </div>
+    <div class="hero__content">
+      <p class="hero__label reveal">Cuisiniste artisan sur mesure</p>
+      <h1 class="hero__title reveal">
+        La cuisine de<br>
+        <em>vos rêves,</em><br>
+        réalisée.
+      </h1>
+      <p class="hero__sub reveal">
+        Conception, fabrication et pose de cuisines haut de gamme,<br>
+        entièrement personnalisées selon votre espace et vos envies.
+      </p>
+      <div class="hero__actions reveal">
+        <a href="#contact" class="btn btn--primary">Prendre contact</a>
+        <a href="#realisations" class="btn btn--ghost">Voir nos réalisations</a>
+      </div>
+    </div>
+    <button class="hero__scroll" id="scroll-down" aria-label="Défiler vers le bas">
+      <span>Découvrir</span>
+      <div class="hero__scroll-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </div>
+    </button>
+  </section>
+  </div><!-- fin hero-scroll-wrapper -->
+
+  <!-- Intro / Chiffres -->
+  <section class="intro">
+    <div class="container">
+      <div class="intro__grid">
+        <div class="intro__text reveal">
+          <span class="label">Notre philosophie</span>
+          <h2>Chaque cuisine est une <em>œuvre unique</em></h2>
+          <p>Nous croyons que la cuisine est le cœur de la maison. C'est pourquoi chaque projet est traité comme une création sur mesure — alliant fonctionnalité, esthétique et durabilité pour un résultat qui vous ressemble.</p>
+          <a href="#a-propos" class="link-arrow">En savoir plus <span>→</span></a>
+        </div>
+        <div class="intro__stats">
+          <div class="stat reveal">
+            <span class="stat__number" data-count="150">0</span>
+            <span class="stat__suffix">+</span>
+            <span class="stat__label">Cuisines réalisées</span>
+          </div>
+          <div class="stat reveal">
+            <span class="stat__number" data-count="98">0</span>
+            <span class="stat__suffix">%</span>
+            <span class="stat__label">Clients satisfaits</span>
+          </div>
+          <div class="stat reveal">
+            <span class="stat__number" data-count="10">0</span>
+            <span class="stat__suffix">ans</span>
+            <span class="stat__label">D'expérience</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">Ce que nous faisons</span>
+        <h2>Nos services</h2>
+        <p class="section-header__sub">De la première ébauche à la livraison finale, nous vous accompagnons à chaque étape.</p>
+      </div>
+      <div class="services__grid">
+        <div class="service-card reveal">
+          <div class="service-card__number">01</div>
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="6" width="36" height="36" rx="2"/>
+              <path d="M6 16h36M16 6v40M26 16v26"/>
+              <circle cx="11" cy="11" r="1.5" fill="currentColor"/>
+              <circle cx="21" cy="11" r="1.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Conception 3D</h3>
+          <p>Du premier croquis au plan 3D photo-réaliste, nous co-créons votre cuisine idéale en tenant compte de chaque contrainte et de vos envies.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-card__number">02</div>
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 38V20l14-10 14 10v18"/>
+              <rect x="18" y="26" width="12" height="12"/>
+              <path d="M22 26v12M26 32h-8"/>
+            </svg>
+          </div>
+          <h3>Fabrication & Pose</h3>
+          <p>Nos artisans expérimentés assurent une fabrication de qualité et une pose soignée, dans le respect des délais convenus et avec la précision du millimètre.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-card__number">03</div>
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="24" cy="24" r="16"/>
+              <path d="M24 14v10l7 4"/>
+              <path d="M8 24c0-8.8 7.2-16 16-16"/>
+            </svg>
+          </div>
+          <h3>Suivi & Garanties</h3>
+          <p>Un interlocuteur unique tout au long du projet — de la visite technique jusqu'à la livraison finale, avec garantie décennale et SAV réactif.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Réalisations -->
+  <section class="realisations" id="realisations">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">Notre travail</span>
+        <h2>Nos réalisations</h2>
+        <p class="section-header__sub">Chaque projet raconte une histoire différente. Voici quelques-unes de nos créations.</p>
+      </div>
+    </div>
+    <div class="gallery">
+      <div class="gallery__item gallery__item--large reveal">
+        <div class="gallery__inner">
+          <div class="gallery__placeholder gallery__placeholder--1"></div>
+          <div class="gallery__caption">
+            <span class="gallery__tag">Contemporain</span>
+            <h4>Cuisine ouverte — Paris</h4>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item reveal">
+        <div class="gallery__inner">
+          <div class="gallery__placeholder gallery__placeholder--2"></div>
+          <div class="gallery__caption">
+            <span class="gallery__tag">Industriel</span>
+            <h4>Loft — Lyon</h4>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item reveal">
+        <div class="gallery__inner">
+          <div class="gallery__placeholder gallery__placeholder--3"></div>
+          <div class="gallery__caption">
+            <span class="gallery__tag">Scandinave</span>
+            <h4>Maison — Bordeaux</h4>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item gallery__item--wide reveal">
+        <div class="gallery__inner">
+          <div class="gallery__placeholder gallery__placeholder--4"></div>
+          <div class="gallery__caption">
+            <span class="gallery__tag">Classique</span>
+            <h4>Villa — Marseille</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section class="about" id="a-propos">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__visual reveal">
+          <div class="about__img-wrap">
+            <div class="about__img-placeholder"></div>
+            <div class="about__img-badge">
+              <span class="badge__number">10</span>
+              <span class="badge__text">ans d'expérience</span>
+            </div>
+          </div>
+        </div>
+        <div class="about__content reveal">
+          <span class="label">Qui sommes-nous</span>
+          <h2>Un artisan passionné par son métier</h2>
+          <p>Cuisiniste indépendant, je mets mon expertise et ma passion au service de votre projet. Chaque réalisation est unique, pensée et fabriquée avec soin pour s'intégrer parfaitement à votre intérieur et à votre mode de vie.</p>
+          <p>Ma force : l'écoute, la précision et un sens aigu du détail qui font la différence entre une bonne cuisine et une cuisine exceptionnelle.</p>
+          <ul class="about__values">
+            <li>
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 10l4 4 8-8"/>
+              </svg>
+              Matériaux premium sélectionnés avec soin
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 10l4 4 8-8"/>
+              </svg>
+              Délais garantis et transparence totale sur les coûts
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 10l4 4 8-8"/>
+              </svg>
+              Garantie décennale et service après-vente réactif
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 10l4 4 8-8"/>
+              </svg>
+              Intervention dans un rayon de 50 km
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn--primary">Démarrer mon projet</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact__grid">
+        <div class="contact__info reveal">
+          <span class="label">Parlons de votre projet</span>
+          <h2>Demandez votre devis gratuit</h2>
+          <p>Décrivez-nous votre projet et nous reviendrons vers vous sous 24h pour organiser une première visite à domicile.</p>
+          <div class="contact__details">
+            <a class="contact__detail" href="tel:+33600000000">
+              <div class="contact__detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 13a19.8 19.8 0 01-3.07-8.67A2 2 0 013 2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Téléphone</strong>
+                <span>+33 6 00 00 00 00</span>
+              </div>
+            </a>
+            <a class="contact__detail" href="mailto:contact@jbcuisines.fr">
+              <div class="contact__detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="M2 7l10 7 10-7"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Email</strong>
+                <span>contact@jbcuisines.fr</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <form class="contact__form reveal" id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prenom">Prénom *</label>
+              <input type="text" id="prenom" name="prenom" placeholder="Jean" autocomplete="given-name" required>
+            </div>
+            <div class="form-group">
+              <label for="nom">Nom *</label>
+              <input type="text" id="nom" name="nom" placeholder="Dupont" autocomplete="family-name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="jean@exemple.fr" autocomplete="email" required>
+          </div>
+          <div class="form-group">
+            <label for="telephone">Téléphone</label>
+            <input type="tel" id="telephone" name="telephone" placeholder="06 00 00 00 00" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label for="message">Votre projet *</label>
+            <textarea id="message" name="message" rows="4" placeholder="Décrivez brièvement votre projet (superficie, style souhaité, budget estimé...)" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">
+            <span class="btn-text">Envoyer ma demande</span>
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+          <p class="form-legal">En soumettant ce formulaire, vous acceptez d'être recontacté concernant votre projet.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="/logo%20minimaliste%20vectoris%C3%A9.svg" alt="JB Cuisines" class="footer__logo">
+          <p>Cuisiniste artisan passionné, créateur de cuisines sur mesure qui vous ressemblent.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#realisations">Réalisations</a></li>
+            <li><a href="#a-propos">À propos</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Légal</h4>
+          <ul>
+            <li><a href="#">Mentions légales</a></li>
+            <li><a href="#">CGV</a></li>
+            <li><a href="#">Politique de confidentialité</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 JB Cuisines. Tous droits réservés.</p>
+        <p>Réalisé avec soin.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
