@@ -5,6 +5,7 @@ import express         from 'express'
 import nodemailer      from 'nodemailer'
 import path            from 'path'
 import { fileURLToPath } from 'url'
+import { exec }          from 'child_process'
 import { SITE, EMAIL_CLIENT, EMAIL_ADMIN } from './contenu.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -213,6 +214,20 @@ app.post('/api/contact', async (req, res) => {
     console.error('[SMTP]', err.message)
     res.status(500).json({ error: "Erreur lors de l'envoi. Veuillez réessayer." })
   }
+})
+
+// ─── Route POST /deploy — déploiement automatique via webhook GitHub ──────────
+app.post('/deploy', (req, res) => {
+  if (req.query.token !== process.env.DEPLOY_TOKEN) {
+    return res.status(401).end()
+  }
+  res.status(200).end()
+
+  exec(`cd "${__dirname}" && git pull && npm run build`, (err, stdout) => {
+    if (err) { console.error('[DEPLOY] Erreur:', err.message); return }
+    console.log('[DEPLOY] Build terminé:\n', stdout.trim())
+    process.exit(0) // Infomaniak redémarre le serveur automatiquement
+  })
 })
 
 // ─── Fallback — toutes les routes renvoient index.html ────────────────────────
