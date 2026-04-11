@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion — Espace client Cuisines Limetta</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css">
+  <script>(function(){var t=localStorage.getItem('cl_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;}());</script>
+</head>
+<body class="auth-page">
+
+  <div class="auth">
+    <!-- Panneau visuel gauche -->
+    <div class="auth__visual">
+      <div class="auth__visual-overlay"></div>
+      <div class="auth__visual-content">
+        <a href="/" class="auth__logo">
+          <img src="/logo%20minimaliste%20vectoris%C3%A9.svg" alt="Cuisines Limetta">
+        </a>
+        <blockquote class="auth__quote">
+          <p>« Votre projet, suivi à chaque étape, avec toute la transparence que vous méritez. »</p>
+        </blockquote>
+      </div>
+    </div>
+
+    <!-- Panneau formulaire droite -->
+    <div class="auth__form-panel">
+      <div class="auth__form-wrap">
+        <div class="auth__header">
+          <h1>Bienvenue</h1>
+          <p>Connectez-vous pour accéder à votre espace projet.</p>
+        </div>
+
+        <form class="auth__form" id="login-form" novalidate>
+          <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="votre@email.fr"
+              autocomplete="email"
+              required
+            >
+          </div>
+          <div class="form-group">
+            <label for="password">
+              Mot de passe
+              <a href="#" class="form-group__link">Mot de passe oublié ?</a>
+            </label>
+            <div class="input-password">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+                autocomplete="current-password"
+                required
+              >
+              <button type="button" class="input-password__toggle" aria-label="Afficher/masquer le mot de passe">
+                <svg class="eye-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <svg class="eye-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none">
+                  <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19M1 1l22 22"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div id="login-error" class="form-error" style="display:none">
+            Identifiants incorrects. Veuillez réessayer.
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--full" id="login-btn">
+            <span class="btn-text">Se connecter</span>
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </form>
+
+        <!-- Accès démo -->
+        <div class="auth__demo">
+          <p>Vous n'avez pas encore de compte ?<br>
+          <strong>Accès démo :</strong> <code>demo@cuisines-limetta.fr</code> / <code>demo1234</code></p>
+        </div>
+
+        <div class="auth__footer">
+          <a href="/" class="link-arrow"><span>←</span> Retour au site</a>
+          <button class="theme-toggle theme-toggle--small" aria-label="Passer en mode sombre">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initTheme } from '/src/ui/theme.js'
+    initTheme()
+  </script>
+  <script type="module">
+    // Connexion simulée (prototype frontend)
+    const DEMO_EMAIL = 'demo@cuisines-limetta.fr'
+    const DEMO_PASSWORD = 'demo1234'
+
+    const form = document.getElementById('login-form')
+    const errorEl = document.getElementById('login-error')
+    const btn = document.getElementById('login-btn')
+    const toggleBtn = document.querySelector('.input-password__toggle')
+    const passwordInput = document.getElementById('password')
+    const eyeShow = document.querySelector('.eye-show')
+    const eyeHide = document.querySelector('.eye-hide')
+
+    // Toggle visibilité mot de passe
+    toggleBtn?.addEventListener('click', () => {
+      const isText = passwordInput.type === 'text'
+      passwordInput.type = isText ? 'password' : 'text'
+      eyeShow.style.display = isText ? '' : 'none'
+      eyeHide.style.display = isText ? 'none' : ''
+    })
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault()
+      errorEl.style.display = 'none'
+
+      const email = form.email.value.trim()
+      const password = form.password.value
+
+      btn.classList.add('loading')
+      btn.disabled = true
+
+      // Simulation d'une requête réseau
+      setTimeout(() => {
+        if (email === DEMO_EMAIL && password === DEMO_PASSWORD) {
+          sessionStorage.setItem('cl_user', JSON.stringify({ nom: 'Martin Dubois', email }))
+          window.location.href = '/tableau-de-bord.html'
+        } else {
+          errorEl.style.display = 'flex'
+          btn.classList.remove('loading')
+          btn.disabled = false
+          passwordInput.value = ''
+          passwordInput.focus()
+        }
+      }, 900)
+    })
+  </script>
+</body>
+</html>

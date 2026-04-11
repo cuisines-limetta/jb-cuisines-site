@@ -108,9 +108,10 @@ function initScrubbing(frames, ctx, wrapper, content, scrollBtn) {
     ctx.drawImage(frames[frameIndex], 0, 0)
 
     if (content) {
-      const o = Math.max(0, 1 - progress * 4)
-      content.style.opacity   = o
-      content.style.transform = `translateY(${-progress * 40}px)`
+      // Toujours visible — léger parallaxe vertical pour donner de la vie
+      const ty = -progress * 60
+      content.style.opacity   = 1
+      content.style.transform = `translateY(${ty}px)`
     }
     if (scrollBtn) {
       scrollBtn.style.opacity = Math.max(0, 1 - progress * 8)

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de bord — Espace client Cuisines Limetta</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css">
+  <script>(function(){var t=localStorage.getItem('cl_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;}());</script>
+</head>
+<body class="dashboard-page">
+
+  <!-- Sidebar -->
+  <aside class="db-sidebar" id="db-sidebar">
+    <div class="db-sidebar__logo">
+      <a href="/">
+        <img src="/logo%20minimaliste%20vectoris%C3%A9.svg" alt="Cuisines Limetta">
+      </a>
+    </div>
+    <nav class="db-nav">
+      <ul>
+        <li>
+          <a href="#" class="db-nav__link active" data-view="overview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+            Vue d'ensemble
+          </a>
+        </li>
+        <li>
+          <a href="#" class="db-nav__link" data-view="suivi">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M9 11l3 3L22 4"/>
+              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+            </svg>
+            Suivi de projet
+          </a>
+        </li>
+        <li>
+          <a href="#" class="db-nav__link" data-view="documents">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+              <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+            </svg>
+            Documents
+          </a>
+        </li>
+        <li>
+          <a href="#" class="db-nav__link" data-view="messagerie">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+            </svg>
+            Messagerie
+            <span class="db-nav__badge">2</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="db-sidebar__footer">
+      <div class="db-user" id="db-user">
+        <div class="db-user__avatar">MD</div>
+        <div class="db-user__info">
+          <strong id="db-user-name">Martin Dubois</strong>
+          <span>Client</span>
+        </div>
+      </div>
+      <button class="theme-toggle theme-toggle--sidebar" aria-label="Passer en mode sombre">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <span class="theme-toggle__label">Mode sombre</span>
+      </button>
+      <a href="/connexion.html" class="db-logout" id="db-logout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
+        </svg>
+        Déconnexion
+      </a>
+    </div>
+  </aside>
+
+  <!-- Contenu principal -->
+  <main class="db-main" id="db-main">
+
+    <!-- Header mobile -->
+    <div class="db-topbar">
+      <button class="db-topbar__burger" id="db-burger" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      </button>
+      <span class="db-topbar__title" id="db-topbar-title">Vue d'ensemble</span>
+    </div>
+
+    <!-- ── VUE : OVERVIEW ──────────────────────────────────────── -->
+    <section class="db-view active" id="view-overview">
+      <div class="db-view__header">
+        <div>
+          <h1>Vue d'ensemble</h1>
+          <p class="db-view__subtitle">Bonjour, <span id="welcome-name">Martin</span> — voici l'état de votre projet.</p>
+        </div>
+        <div class="db-view__date">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <path d="M16 2v4M8 2v4M3 10h18"/>
+          </svg>
+          <span id="current-date"></span>
+        </div>
+      </div>
+
+      <!-- Carte projet actif -->
+      <div class="db-project-card">
+        <div class="db-project-card__header">
+          <div>
+            <span class="label">Projet en cours</span>
+            <h2>Cuisine — Appartement Paris 11e</h2>
+          </div>
+          <div class="db-project-card__status">
+            <span class="status-badge status-badge--active">En fabrication</span>
+          </div>
+        </div>
+        <div class="db-project-card__progress">
+          <div class="db-progress-steps">
+            <div class="db-progress-step done">
+              <div class="db-progress-step__dot">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3 3 7-7"/></svg>
+              </div>
+              <span>Visite technique</span>
+            </div>
+            <div class="db-progress-step done">
+              <div class="db-progress-step__dot">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3 3 7-7"/></svg>
+              </div>
+              <span>Devis validé</span>
+            </div>
+            <div class="db-progress-step done">
+              <div class="db-progress-step__dot">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3 3 7-7"/></svg>
+              </div>
+              <span>Plans validés</span>
+            </div>
+            <div class="db-progress-step active">
+              <div class="db-progress-step__dot"></div>
+              <span>Fabrication</span>
+            </div>
+            <div class="db-progress-step">
+              <div class="db-progress-step__dot"></div>
+              <span>Livraison & Pose</span>
+            </div>
+          </div>
+          <div class="db-project-card__bar">
+            <div class="db-project-card__bar-fill" style="width: 68%"></div>
+          </div>
+          <div class="db-project-card__bar-labels">
+            <span>Démarrage : 12 févr. 2026</span>
+            <span>68% complété</span>
+            <span>Livraison estimée : 15 mai 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistiques rapides -->
+      <div class="db-stats">
+        <div class="db-stat-card">
+          <div class="db-stat-card__icon db-stat-card__icon--blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M9 11l3 3L22 4"/>
+              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+            </svg>
+          </div>
+          <div>
+            <span class="db-stat-card__value">3 / 5</span>
+            <span class="db-stat-card__label">Étapes complétées</span>
+          </div>
+        </div>
+        <div class="db-stat-card">
+          <div class="db-stat-card__icon db-stat-card__icon--green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+              <path d="M14 2v6h6"/>
+            </svg>
+          </div>
+          <div>
+            <span class="db-stat-card__value">4</span>
+            <span class="db-stat-card__label">Documents disponibles</span>
+          </div>
+        </div>
+        <div class="db-stat-card">
+          <div class="db-stat-card__icon db-stat-card__icon--orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+            </svg>
+          </div>
+          <div>
+            <span class="db-stat-card__value">2</span>
+            <span class="db-stat-card__label">Nouveaux messages</span>
+          </div>
+        </div>
+        <div class="db-stat-card">
+          <div class="db-stat-card__icon db-stat-card__icon--purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+          </div>
+          <div>
+            <span class="db-stat-card__value">34j</span>
+            <span class="db-stat-card__label">Avant livraison</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grille overview bas -->
+      <div class="db-overview-bottom">
+        <!-- Prochaine échéance -->
+        <div class="db-card">
+          <div class="db-card__header">
+            <h3>Prochaines échéances</h3>
+          </div>
+          <ul class="db-agenda">
+            <li class="db-agenda__item db-agenda__item--today">
+              <div class="db-agenda__date">
+                <span class="db-agenda__day">Auj.</span>
+              </div>
+              <div class="db-agenda__content">
+                <strong>Fin de fabrication des caissons</strong>
+                <span>Atelier Limetta</span>
+              </div>
+              <span class="status-badge status-badge--active">En cours</span>
+            </li>
+            <li class="db-agenda__item">
+              <div class="db-agenda__date">
+                <span class="db-agenda__day">28</span>
+                <span class="db-agenda__month">Avr</span>
+              </div>
+              <div class="db-agenda__content">
+                <strong>Livraison des matériaux</strong>
+                <span>Appartement Paris 11e</span>
+              </div>
+              <span class="status-badge">Planifié</span>
+            </li>
+            <li class="db-agenda__item">
+              <div class="db-agenda__date">
+                <span class="db-agenda__day">05</span>
+                <span class="db-agenda__month">Mai</span>
+              </div>
+              <div class="db-agenda__content">
+                <strong>Début de la pose</strong>
+                <span>Appartement Paris 11e</span>
+              </div>
+              <span class="status-badge">Planifié</span>
+            </li>
+            <li class="db-agenda__item">
+              <div class="db-agenda__date">
+                <span class="db-agenda__day">15</span>
+                <span class="db-agenda__month">Mai</span>
+              </div>
+              <div class="db-agenda__content">
+                <strong>Livraison finale & réception</strong>
+                <span>Appartement Paris 11e</span>
+              </div>
+              <span class="status-badge status-badge--success">Objectif</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Derniers messages -->
+        <div class="db-card">
+          <div class="db-card__header">
+            <h3>Derniers messages</h3>
+            <a href="#" class="link-arrow db-card__link" data-view-link="messagerie">Tout voir <span>→</span></a>
+          </div>
+          <div class="db-messages-preview">
+            <div class="db-msg-preview db-msg-preview--unread">
+              <div class="db-msg-preview__avatar">JL</div>
+              <div class="db-msg-preview__body">
+                <div class="db-msg-preview__meta">
+                  <strong>Jordan Limetta</strong>
+                  <time>Il y a 2h</time>
+                </div>
+                <p>Les caissons sont en cours de laquage, la couleur est parfaite ! Je vous envoie des photos dès que possible.</p>
+              </div>
+            </div>
+            <div class="db-msg-preview db-msg-preview--unread">
+              <div class="db-msg-preview__avatar">JL</div>
+              <div class="db-msg-preview__body">
+                <div class="db-msg-preview__meta">
+                  <strong>Jordan Limetta</strong>
+                  <time>Hier</time>
+                </div>
+                <p>Rappel : pouvez-vous confirmer la date de disponibilité pour la pose ? Nous avons deux créneaux disponibles en mai.</p>
+              </div>
+            </div>
+            <div class="db-msg-preview">
+              <div class="db-msg-preview__avatar">MD</div>
+              <div class="db-msg-preview__body">
+                <div class="db-msg-preview__meta">
+                  <strong>Vous</strong>
+                  <time>Il y a 3j</time>
+                </div>
+                <p>Parfait, les plans sont validés. On peut lancer la fabrication !</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VUE : SUIVI DE PROJET ───────────────────────────────── -->
+    <section class="db-view" id="view-suivi">
+      <div class="db-view__header">
+        <div>
+          <h1>Suivi de projet</h1>
+          <p class="db-view__subtitle">Timeline détaillée de votre projet de cuisine.</p>
+        </div>
+      </div>
+
+      <div class="db-timeline">
+        <div class="db-timeline__item db-timeline__item--done">
+          <div class="db-timeline__marker">
+            <div class="db-timeline__dot">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3 3 7-7"/></svg>
+            </div>
+            <div class="db-timeline__line"></div>
+          </div>
+          <div class="db-timeline__content">
+            <div class="db-timeline__content-header">
+              <h3>Visite technique & prise de mesures</h3>
+              <time>12 février 2026</time>
+            </div>
+            <p>Visite à domicile pour prise de mesures précises, analyse des contraintes (plomberie, électricité, ventilation) et définition des besoins avec le client.</p>
+            <div class="db-timeline__tags">
+              <span class="db-tag db-tag--done">Terminé</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="db-timeline__item db-timeline__item--done">
+          <div class="db-timeline__marker">
+            <div class="db-timeline__dot">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3 3 7-7"/></svg>
+            </div>
+            <div class="db-timeline__line"></div>
+          </div>
+          <div class="db-timeline__content">
+            <div class="db-timeline__content-header">
+              <h3>Conception 3D & validation du devis</h3>
+              <time>24 février 2026</time>
+            </div>
+            <p>Création des plans 3D photo-réalistes, présentation des matériaux et finitions sélectionnés. Validation du devis définitif et signature du bon de commande.</p>
+            <div class="db-timeline__tags">
+              <span class="db-tag db-tag--done">Terminé</span>
+              <span class="db-tag">Montant : 14 800 €</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="db-timeline__item db-timeline__item--done">
+          <div class="db-timeline__marker">
+            <div class="db-timeline__dot">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 8l3 3 7-7"/></svg>
+            </div>
+            <div class="db-timeline__line"></div>
+          </div>
+          <div class="db-timeline__content">
+            <div class="db-timeline__content-header">
+              <h3>Validation des plans définitifs</h3>
+              <time>10 mars 2026</time>
+            </div>
+            <p>Plans techniques finalisés après modifications client. Validation des dimensions, couleurs, poignées et équipements. Lancement de la fabrication suite à la validation.</p>
+            <div class="db-timeline__tags">
+              <span class="db-tag db-tag--done">Terminé</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="db-timeline__item db-timeline__item--active">
+          <div class="db-timeline__marker">
+            <div class="db-timeline__dot db-timeline__dot--pulse"></div>
+            <div class="db-timeline__line"></div>
+          </div>
+          <div class="db-timeline__content">
+            <div class="db-timeline__content-header">
+              <h3>Fabrication en atelier</h3>
+              <time>15 mars → 25 avril 2026</time>
+            </div>
+            <p>Fabrication des caissons, façades et plans de travail dans notre atelier. Laquage des façades en cours. Livraison du plan de travail en granit confirmée pour le 22 avril.</p>
+            <div class="db-timeline__progress">
+              <div class="db-timeline__progress-bar" style="width: 75%"></div>
+            </div>
+            <p class="db-timeline__progress-label">75% de la fabrication terminée</p>
+            <div class="db-timeline__tags">
+              <span class="db-tag db-tag--active">En cours</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="db-timeline__item">
+          <div class="db-timeline__marker">
+            <div class="db-timeline__dot db-timeline__dot--pending"></div>
+            <div class="db-timeline__line"></div>
+          </div>
+          <div class="db-timeline__content">
+            <div class="db-timeline__content-header">
+              <h3>Livraison & Installation</h3>
+              <time>5 → 15 mai 2026 (estimé)</time>
+            </div>
+            <p>Livraison des éléments sur site et installation complète par nos artisans. Raccordement électrique et plomberie inclus. Réglages finaux et nettoyage de chantier.</p>
+            <div class="db-timeline__tags">
+              <span class="db-tag">Planifié</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="db-timeline__item db-timeline__item--last">
+          <div class="db-timeline__marker">
+            <div class="db-timeline__dot db-timeline__dot--pending"></div>
+          </div>
+          <div class="db-timeline__content">
+            <div class="db-timeline__content-header">
+              <h3>Réception & Remise des clés</h3>
+              <time>15 mai 2026 (estimé)</time>
+            </div>
+            <p>Visite de réception avec le client. Vérification de tous les éléments, remise des notices et garanties. Remise officielle de la cuisine.</p>
+            <div class="db-timeline__tags">
+              <span class="db-tag">À venir</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VUE : DOCUMENTS ────────────────────────────────────── -->
+    <section class="db-view" id="view-documents">
+      <div class="db-view__header">
+        <div>
+          <h1>Documents</h1>
+          <p class="db-view__subtitle">Tous vos documents contractuels et techniques.</p>
+        </div>
+      </div>
+
+      <div class="db-docs-grid">
+        <div class="db-doc-card">
+          <div class="db-doc-card__icon db-doc-card__icon--pdf">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M4 28V4a2 2 0 012-2h16l6 6v20a2 2 0 01-2 2H6a2 2 0 01-2-2z"/>
+              <path d="M22 2v6h6" stroke-width="1"/>
+              <text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="7" font-weight="600" fill="#e53935" stroke="none">PDF</text>
+            </svg>
+          </div>
+          <div class="db-doc-card__info">
+            <strong>Devis signé</strong>
+            <span>Devis_Dubois_Mars2026.pdf</span>
+            <time>24 février 2026</time>
+          </div>
+          <a href="#" class="db-doc-card__download" aria-label="Télécharger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="db-doc-card">
+          <div class="db-doc-card__icon db-doc-card__icon--pdf">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M4 28V4a2 2 0 012-2h16l6 6v20a2 2 0 01-2 2H6a2 2 0 01-2-2z"/>
+              <path d="M22 2v6h6" stroke-width="1"/>
+              <text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="7" font-weight="600" fill="#e53935" stroke="none">PDF</text>
+            </svg>
+          </div>
+          <div class="db-doc-card__info">
+            <strong>Bon de commande</strong>
+            <span>BonCommande_Dubois_2026.pdf</span>
+            <time>24 février 2026</time>
+          </div>
+          <a href="#" class="db-doc-card__download" aria-label="Télécharger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="db-doc-card">
+          <div class="db-doc-card__icon db-doc-card__icon--img">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <rect x="3" y="6" width="26" height="20" rx="2"/>
+              <circle cx="10" cy="13" r="2"/>
+              <path d="M3 22l6-5 5 5 4-4 9 7"/>
+            </svg>
+          </div>
+          <div class="db-doc-card__info">
+            <strong>Plans 3D validés</strong>
+            <span>Plans3D_Cuisine_Dubois.jpg</span>
+            <time>10 mars 2026</time>
+          </div>
+          <a href="#" class="db-doc-card__download" aria-label="Télécharger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="db-doc-card">
+          <div class="db-doc-card__icon db-doc-card__icon--pdf">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M4 28V4a2 2 0 012-2h16l6 6v20a2 2 0 01-2 2H6a2 2 0 01-2-2z"/>
+              <path d="M22 2v6h6" stroke-width="1"/>
+              <text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="7" font-weight="600" fill="#e53935" stroke="none">PDF</text>
+            </svg>
+          </div>
+          <div class="db-doc-card__info">
+            <strong>Acompte — Facture</strong>
+            <span>Facture_Acompte_50pct.pdf</span>
+            <time>28 février 2026</time>
+          </div>
+          <a href="#" class="db-doc-card__download" aria-label="Télécharger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="db-card db-docs-info">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        <p>Besoin d'un document spécifique ? Contactez-nous directement via la messagerie ou par téléphone.</p>
+      </div>
+    </section>
+
+    <!-- ── VUE : MESSAGERIE ───────────────────────────────────── -->
+    <section class="db-view" id="view-messagerie">
+      <div class="db-view__header">
+        <div>
+          <h1>Messagerie</h1>
+          <p class="db-view__subtitle">Échangez directement avec votre cuisiniste.</p>
+        </div>
+      </div>
+
+      <div class="db-chat">
+        <div class="db-chat__messages" id="chat-messages">
+
+          <div class="db-chat__day-separator">
+            <span>8 avril 2026</span>
+          </div>
+
+          <div class="db-chat__msg db-chat__msg--them">
+            <div class="db-chat__msg-avatar">JL</div>
+            <div class="db-chat__msg-bubble">
+              <p>Bonjour Martin ! Je voulais vous informer que nous avons démarré la fabrication des caissons aujourd'hui. Tout se passe comme prévu.</p>
+              <time>09:14</time>
+            </div>
+          </div>
+
+          <div class="db-chat__msg db-chat__msg--me">
+            <div class="db-chat__msg-bubble">
+              <p>Parfait, c'est une très bonne nouvelle ! Est-ce que vous pouvez me donner une estimation plus précise pour la date de pose ?</p>
+              <time>10:32</time>
+            </div>
+          </div>
+
+          <div class="db-chat__msg db-chat__msg--them">
+            <div class="db-chat__msg-avatar">JL</div>
+            <div class="db-chat__msg-bubble">
+              <p>Bien sûr ! Si la fabrication se termine comme prévu le 25 avril, nous pouvons commencer la pose entre le 5 et le 7 mai. Je vous enverrai les photos des façades laquées dès qu'elles seront prêtes, d'ici 2-3 jours.</p>
+              <time>11:05</time>
+            </div>
+          </div>
+
+          <div class="db-chat__msg db-chat__msg--me">
+            <div class="db-chat__msg-bubble">
+              <p>Parfait, les plans sont validés. On peut lancer la fabrication !</p>
+              <time>14:20</time>
+            </div>
+          </div>
+
+          <div class="db-chat__day-separator">
+            <span>Aujourd'hui</span>
+          </div>
+
+          <div class="db-chat__msg db-chat__msg--them db-chat__msg--unread">
+            <div class="db-chat__msg-avatar">JL</div>
+            <div class="db-chat__msg-bubble">
+              <p>Les caissons sont en cours de laquage, la couleur est parfaite ! Je vous envoie des photos dès que possible.</p>
+              <time>09:47</time>
+            </div>
+          </div>
+
+          <div class="db-chat__msg db-chat__msg--them db-chat__msg--unread">
+            <div class="db-chat__msg-avatar">JL</div>
+            <div class="db-chat__msg-bubble">
+              <p>Rappel : pouvez-vous confirmer votre disponibilité pour la pose ? Nous avons deux créneaux : le 5 mai ou le 7 mai. Préférence ?</p>
+              <time>10:15</time>
+            </div>
+          </div>
+
+        </div>
+
+        <form class="db-chat__composer" id="chat-form">
+          <div class="db-chat__input-wrap">
+            <textarea
+              id="chat-input"
+              placeholder="Écrire un message…"
+              rows="1"
+              maxlength="1000"
+            ></textarea>
+          </div>
+          <button type="submit" class="db-chat__send" aria-label="Envoyer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module">
+    import { initTheme } from '/src/ui/theme.js'
+    initTheme()
+  </script>
+  <script type="module" src="/src/ui/dashboard.js"></script>
+</body>
+</html>

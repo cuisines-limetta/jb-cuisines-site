@@ -1,17 +1,19 @@
 {
-  "name": "jb-cuisines",
+  "name": "cuisines-limetta",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "vite preview --port 3000 --host"
+    "start": "node --env-file=.env server.js"
   },
   "devDependencies": {
     "vite": "^5.4.0"
   },
   "dependencies": {
-    "gsap": "^3.12.5"
+    "express": "^4.19.2",
+    "gsap": "^3.12.5",
+    "nodemailer": "^6.9.14"
   }
 }

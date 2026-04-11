@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JB Cuisines — Cuisiniste artisan sur mesure</title>
-  <meta name="description" content="Conception, fabrication et pose de cuisines haut de gamme entièrement sur mesure. Cuisiniste artisan passionné, à votre service.">
+  <title>Cuisines Limetta — Cuisiniste sur mesure à Lyon</title>
+  <meta name="description" content="Cuisines Limetta, cuisiniste artisan sur mesure à Lyon et dans un rayon de 50 km. Conception 3D, fabrication et pose de cuisines haut de gamme. Devis gratuit.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles/main.css">
+  <script>(function(){var t=localStorage.getItem('cl_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;}());</script>
 </head>
 <body>
 
@@ -16,13 +17,30 @@
   <nav class="nav" id="nav">
     <div class="nav__container">
       <a href="#hero" class="nav__logo">
-        <img src="/logo%20minimaliste%20vectoris%C3%A9.svg" alt="JB Cuisines">
+        <img src="/logo%20minimaliste%20vectoris%C3%A9.svg" alt="Cuisines Limetta">
       </a>
       <ul class="nav__links">
-        <li><a href="#services">Services</a></li>
+        <li><a href="#prestations">Prestations</a></li>
         <li><a href="#realisations">Réalisations</a></li>
         <li><a href="#a-propos">À propos</a></li>
         <li><a href="#contact" class="nav__cta">Devis gratuit</a></li>
+        <li>
+          <button class="theme-toggle" aria-label="Passer en mode sombre">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="display:none">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+          </button>
+        </li>
+        <li><a href="/connexion.html" class="nav__client">Mon espace
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="10" cy="7" r="3"/>
+            <path d="M3 17c0-3.3 3.1-6 7-6s7 2.7 7 6"/>
+          </svg>
+        </a></li>
       </ul>
       <button class="nav__burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -30,10 +48,11 @@
     </div>
     <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
       <ul>
-        <li><a href="#services">Services</a></li>
+        <li><a href="#prestations">Prestations</a></li>
         <li><a href="#realisations">Réalisations</a></li>
         <li><a href="#a-propos">À propos</a></li>
         <li><a href="#contact">Devis gratuit</a></li>
+        <li><a href="/connexion.html">Mon espace client</a></li>
       </ul>
     </div>
   </nav>
@@ -42,20 +61,15 @@
   <div class="hero-scroll-wrapper" id="hero-wrapper">
   <section class="hero" id="hero">
     <div class="hero__video-wrap">
-      <!-- Vidéo visible pendant l'extraction des frames -->
       <video class="hero__video" id="hero-video" muted autoplay loop playsinline preload="auto">
         <source src="/Je_veux_que_lamnagement_intrie_Kling_30__14193.mp4" type="video/mp4">
       </video>
-      <!-- Canvas affiché une fois les frames prêtes -->
       <canvas class="hero__canvas" id="hero-canvas"></canvas>
       <div class="hero__overlay"></div>
+
       <!-- Étapes du projet — apparaissent progressivement au scroll -->
       <div class="hero-steps" id="hero-steps" aria-hidden="true">
         <div class="hero-step" data-step="0">
-          <div class="hero-step__marker">
-            <div class="hero-step__dot"></div>
-            <div class="hero-step__line"></div>
-          </div>
           <div class="hero-step__body">
             <span class="hero-step__num">01</span>
             <h3 class="hero-step__title">Étude du besoin</h3>
@@ -63,10 +77,6 @@
           </div>
         </div>
         <div class="hero-step" data-step="1">
-          <div class="hero-step__marker">
-            <div class="hero-step__dot"></div>
-            <div class="hero-step__line"></div>
-          </div>
           <div class="hero-step__body">
             <span class="hero-step__num">02</span>
             <h3 class="hero-step__title">Conception 3D</h3>
@@ -74,10 +84,6 @@
           </div>
         </div>
         <div class="hero-step" data-step="2">
-          <div class="hero-step__marker">
-            <div class="hero-step__dot"></div>
-            <div class="hero-step__line"></div>
-          </div>
           <div class="hero-step__body">
             <span class="hero-step__num">03</span>
             <h3 class="hero-step__title">Fabrication & Pose</h3>
@@ -85,10 +91,6 @@
           </div>
         </div>
         <div class="hero-step" data-step="3">
-          <div class="hero-step__marker">
-            <div class="hero-step__dot"></div>
-            <div class="hero-step__line"></div>
-          </div>
           <div class="hero-step__body">
             <span class="hero-step__num">04</span>
             <h3 class="hero-step__title">SAV & Garanties</h3>
@@ -97,7 +99,7 @@
         </div>
       </div>
 
-      <!-- Pastilles de progression des étapes -->
+      <!-- Pastilles de progression -->
       <div class="hero-steps-progress" id="hero-steps-progress">
         <div class="hero-steps-progress__dot"></div>
         <div class="hero-steps-progress__dot"></div>
@@ -113,22 +115,19 @@
         <span class="hero-loading__label">Préparation de l'expérience…</span>
       </div>
     </div>
+
     <div class="hero__content">
-      <p class="hero__label reveal">Cuisiniste artisan sur mesure</p>
-      <h1 class="hero__title reveal">
-        La cuisine de<br>
-        <em>vos rêves,</em><br>
-        réalisée.
-      </h1>
+      <p class="hero__label reveal">Cuisiniste artisan — Lyon & région</p>
       <p class="hero__sub reveal">
-        Conception, fabrication et pose de cuisines haut de gamme,<br>
-        entièrement personnalisées selon votre espace et vos envies.
+        Conception 3D, fabrication et pose de cuisines haut de gamme,<br>
+        entièrement sur mesure selon votre espace et vos envies.
       </p>
       <div class="hero__actions reveal">
-        <a href="#contact" class="btn btn--primary">Prendre contact</a>
+        <a href="#contact" class="btn btn--primary">Demander un devis</a>
         <a href="#realisations" class="btn btn--ghost">Voir nos réalisations</a>
       </div>
     </div>
+
     <button class="hero__scroll" id="scroll-down" aria-label="Défiler vers le bas">
       <span>Découvrir</span>
       <div class="hero__scroll-arrow">
@@ -140,8 +139,12 @@
   </section>
   </div><!-- fin hero-scroll-wrapper -->
 
-  <!-- Intro / Chiffres -->
-  <section class="intro">
+  <!-- Slogan + Intro -->
+  <section class="intro" id="intro">
+    <div class="intro__slogan reveal">
+      <span>À vos côtés,</span>
+      <em>sans pépins.</em>
+    </div>
     <div class="container">
       <div class="intro__grid">
         <div class="intro__text reveal">
@@ -152,31 +155,31 @@
         </div>
         <div class="intro__stats">
           <div class="stat reveal">
-            <span class="stat__number" data-count="150">0</span>
-            <span class="stat__suffix">+</span>
-            <span class="stat__label">Cuisines réalisées</span>
+            <span class="stat__number">100</span>
+            <span class="stat__suffix">%</span>
+            <span class="stat__label">Sur mesure</span>
           </div>
           <div class="stat reveal">
-            <span class="stat__number" data-count="98">0</span>
-            <span class="stat__suffix">%</span>
-            <span class="stat__label">Clients satisfaits</span>
+            <span class="stat__number" data-count="24">0</span>
+            <span class="stat__suffix">h</span>
+            <span class="stat__label">Délai de réponse garanti</span>
           </div>
           <div class="stat reveal">
             <span class="stat__number" data-count="10">0</span>
             <span class="stat__suffix">ans</span>
-            <span class="stat__label">D'expérience</span>
+            <span class="stat__label">Garantie décennale</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services -->
-  <section class="services" id="services">
+  <!-- Prestations -->
+  <section class="services" id="prestations">
     <div class="container">
       <div class="section-header reveal">
         <span class="label">Ce que nous faisons</span>
-        <h2>Nos services</h2>
+        <h2>Nos prestations</h2>
         <p class="section-header__sub">De la première ébauche à la livraison finale, nous vous accompagnons à chaque étape.</p>
       </div>
       <div class="services__grid">
@@ -217,6 +220,20 @@
           <h3>Suivi & Garanties</h3>
           <p>Un interlocuteur unique tout au long du projet — de la visite technique jusqu'à la livraison finale, avec garantie décennale et SAV réactif.</p>
         </div>
+        <div class="service-card reveal">
+          <div class="service-card__number">04</div>
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="14" width="32" height="24" rx="2"/>
+              <path d="M8 20h32M16 8v6M32 8v6M16 28h4M24 28h8M16 34h4"/>
+            </svg>
+          </div>
+          <h3>Espace client dédié</h3>
+          <p>Accédez à votre espace personnel pour suivre l'avancement de votre projet, consulter vos documents et échanger directement avec votre cuisiniste.</p>
+        </div>
+      </div>
+      <div class="services__cta reveal">
+        <a href="#contact" class="btn btn--primary">Démarrer mon projet</a>
       </div>
     </div>
   </section>
@@ -229,18 +246,25 @@
         <h2>Nos réalisations</h2>
         <p class="section-header__sub">Chaque projet raconte une histoire différente. Voici quelques-unes de nos créations.</p>
       </div>
+      <div class="gallery__filters reveal">
+        <button class="gallery__filter active" data-filter="all">Tous</button>
+        <button class="gallery__filter" data-filter="contemporain">Contemporain</button>
+        <button class="gallery__filter" data-filter="industriel">Industriel</button>
+        <button class="gallery__filter" data-filter="scandinave">Scandinave</button>
+        <button class="gallery__filter" data-filter="classique">Classique</button>
+      </div>
     </div>
     <div class="gallery">
-      <div class="gallery__item gallery__item--large reveal">
+      <div class="gallery__item gallery__item--large reveal" data-style="contemporain">
         <div class="gallery__inner">
           <div class="gallery__placeholder gallery__placeholder--1"></div>
           <div class="gallery__caption">
             <span class="gallery__tag">Contemporain</span>
-            <h4>Cuisine ouverte — Paris</h4>
+            <h4>Cuisine ouverte — Paris 16e</h4>
           </div>
         </div>
       </div>
-      <div class="gallery__item reveal">
+      <div class="gallery__item reveal" data-style="industriel">
         <div class="gallery__inner">
           <div class="gallery__placeholder gallery__placeholder--2"></div>
           <div class="gallery__caption">
@@ -249,7 +273,7 @@
           </div>
         </div>
       </div>
-      <div class="gallery__item reveal">
+      <div class="gallery__item reveal" data-style="scandinave">
         <div class="gallery__inner">
           <div class="gallery__placeholder gallery__placeholder--3"></div>
           <div class="gallery__caption">
@@ -258,7 +282,7 @@
           </div>
         </div>
       </div>
-      <div class="gallery__item gallery__item--wide reveal">
+      <div class="gallery__item gallery__item--wide reveal" data-style="classique">
         <div class="gallery__inner">
           <div class="gallery__placeholder gallery__placeholder--4"></div>
           <div class="gallery__caption">
@@ -278,16 +302,16 @@
           <div class="about__img-wrap">
             <div class="about__img-placeholder"></div>
             <div class="about__img-badge">
-              <span class="badge__number">10</span>
-              <span class="badge__text">ans d'expérience</span>
+              <span class="badge__number">Lyon</span>
+              <span class="badge__text">& 50 km autour</span>
             </div>
           </div>
         </div>
         <div class="about__content reveal">
           <span class="label">Qui sommes-nous</span>
           <h2>Un artisan passionné par son métier</h2>
-          <p>Cuisiniste indépendant, je mets mon expertise et ma passion au service de votre projet. Chaque réalisation est unique, pensée et fabriquée avec soin pour s'intégrer parfaitement à votre intérieur et à votre mode de vie.</p>
-          <p>Ma force : l'écoute, la précision et un sens aigu du détail qui font la différence entre une bonne cuisine et une cuisine exceptionnelle.</p>
+          <p>Cuisiniste artisan basé dans l'Ain, j'interviens à Lyon et dans un rayon de 50 km. Passionné par la menuiserie et le design d'intérieur, je traite chaque projet avec la même rigueur : de la première ébauche jusqu'à la livraison.</p>
+          <p>Mon engagement : une écoute sans filtre, des matériaux choisis avec exigence, et une transparence totale à chaque étape — pour que votre cuisine soit exactement celle que vous aviez imaginée.</p>
           <ul class="about__values">
             <li>
               <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -299,37 +323,40 @@
               <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 10l4 4 8-8"/>
               </svg>
-              Délais garantis et transparence totale sur les coûts
+              Devis détaillé et prix transparent, sans surprises
             </li>
             <li>
               <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 10l4 4 8-8"/>
               </svg>
-              Garantie décennale et service après-vente réactif
+              Garantie décennale et SAV réactif après livraison
             </li>
             <li>
               <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 10l4 4 8-8"/>
               </svg>
-              Intervention dans un rayon de 50 km
+              Intervention à Lyon et dans un rayon de 50 km
             </li>
           </ul>
-          <a href="#contact" class="btn btn--primary">Démarrer mon projet</a>
+          <div class="about__actions">
+            <a href="#contact" class="btn btn--primary">Démarrer mon projet</a>
+            <a href="/connexion.html" class="link-arrow">Accéder à mon espace <span>→</span></a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
+  <!-- Contact / Devis -->
   <section class="contact" id="contact">
     <div class="container">
       <div class="contact__grid">
         <div class="contact__info reveal">
           <span class="label">Parlons de votre projet</span>
           <h2>Demandez votre devis gratuit</h2>
-          <p>Décrivez-nous votre projet et nous reviendrons vers vous sous 24h pour organiser une première visite à domicile.</p>
+          <p>Décrivez-nous votre projet et nous revenons vers vous sous 24h pour organiser une première rencontre, sans engagement.</p>
           <div class="contact__details">
-            <a class="contact__detail" href="tel:+33600000000">
+            <a class="contact__detail" href="tel:+33767012102">
               <div class="contact__detail-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 13a19.8 19.8 0 01-3.07-8.67A2 2 0 013 2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
@@ -337,10 +364,10 @@
               </div>
               <div>
                 <strong>Téléphone</strong>
-                <span>+33 6 00 00 00 00</span>
+                <span>+33 7 67 01 21 02</span>
               </div>
             </a>
-            <a class="contact__detail" href="mailto:contact@jbcuisines.fr">
+            <a class="contact__detail" href="mailto:j.bayonas@cuisines-limetta.com">
               <div class="contact__detail-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
                   <rect x="2" y="4" width="20" height="16" rx="2"/>
@@ -349,9 +376,25 @@
               </div>
               <div>
                 <strong>Email</strong>
-                <span>contact@jbcuisines.fr</span>
+                <span>j.bayonas@cuisines-limetta.com</span>
               </div>
             </a>
+            <div class="contact__detail">
+              <div class="contact__detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Adresse</strong>
+                <span>410 rue des Rives de l'Ain<br>01160 Varambon</span>
+              </div>
+            </div>
+          </div>
+          <div class="contact__client-access">
+            <p>Déjà client ? Accédez à votre espace de suivi de projet.</p>
+            <a href="/connexion.html" class="btn btn--outline">Connexion espace client</a>
           </div>
         </div>
         <form class="contact__form reveal" id="contact-form" novalidate>
@@ -374,6 +417,17 @@
             <input type="tel" id="telephone" name="telephone" placeholder="06 00 00 00 00" autocomplete="tel">
           </div>
           <div class="form-group">
+            <label for="style">Style souhaité</label>
+            <select id="style" name="style">
+              <option value="">-- Choisir un style --</option>
+              <option value="contemporain">Contemporain</option>
+              <option value="classique">Classique</option>
+              <option value="scandinave">Scandinave</option>
+              <option value="industriel">Industriel</option>
+              <option value="autre">Autre / Je ne sais pas encore</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="message">Votre projet *</label>
             <textarea id="message" name="message" rows="4" placeholder="Décrivez brièvement votre projet (superficie, style souhaité, budget estimé...)" required></textarea>
           </div>
@@ -383,7 +437,7 @@
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </button>
-          <p class="form-legal">En soumettant ce formulaire, vous acceptez d'être recontacté concernant votre projet.</p>
+          <p class="form-legal">En soumettant ce formulaire, vous acceptez d'être recontacté concernant votre projet. Aucune donnée ne sera transmise à des tiers.</p>
         </form>
       </div>
     </div>
@@ -394,16 +448,37 @@
     <div class="container">
       <div class="footer__grid">
         <div class="footer__brand">
-          <img src="/logo%20minimaliste%20vectoris%C3%A9.svg" alt="JB Cuisines" class="footer__logo">
-          <p>Cuisiniste artisan passionné, créateur de cuisines sur mesure qui vous ressemblent.</p>
+          <img src="/logo%20minimaliste%20vectoris%C3%A9.svg" alt="Cuisines Limetta" class="footer__logo">
+          <p>Cuisiniste artisan à Varambon, près de Lyon.<br>À vos côtés, sans pépins.</p>
+          <div class="footer__socials">
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <rect x="2" y="2" width="20" height="20" rx="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="Pinterest">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.24-5.24 1.24-5.24s-.32-.63-.32-1.56c0-1.47.85-2.57 1.91-2.57.9 0 1.34.68 1.34 1.49 0 .91-.58 2.27-.88 3.53-.25 1.06.53 1.92 1.57 1.92 1.88 0 3.14-2.4 3.14-5.24 0-2.17-1.47-3.69-3.56-3.69-2.42 0-3.84 1.82-3.84 3.7 0 .73.28 1.52.63 1.95.07.08.08.16.06.24l-.24.97c-.04.15-.12.19-.28.11-1.05-.49-1.71-2.02-1.71-3.26 0-2.65 1.93-5.08 5.56-5.08 2.92 0 5.19 2.08 5.19 4.86 0 2.9-1.83 5.23-4.37 5.23-.85 0-1.66-.44-1.93-.97l-.53 1.96c-.19.73-.7 1.64-1.05 2.2.79.24 1.63.37 2.5.37 5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+              </svg>
+            </a>
+          </div>
         </div>
         <div class="footer__col">
           <h4>Navigation</h4>
           <ul>
-            <li><a href="#services">Services</a></li>
+            <li><a href="#prestations">Prestations</a></li>
             <li><a href="#realisations">Réalisations</a></li>
             <li><a href="#a-propos">À propos</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Contact & Devis</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Espace client</h4>
+          <ul>
+            <li><a href="/connexion.html">Connexion</a></li>
+            <li><a href="/tableau-de-bord.html">Mon tableau de bord</a></li>
           </ul>
         </div>
         <div class="footer__col">
@@ -416,8 +491,8 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <p>© 2026 JB Cuisines. Tous droits réservés.</p>
-        <p>Réalisé avec soin.</p>
+        <p>© 2026 Cuisines Limetta — Jordan Bayonas. Tous droits réservés.</p>
+        <p>Lyon & région — <a href="mailto:j.bayonas@cuisines-limetta.com" style="color:inherit;opacity:.6">j.bayonas@cuisines-limetta.com</a></p>
       </div>
     </div>
   </footer>
