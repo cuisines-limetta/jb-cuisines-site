@@ -226,7 +226,7 @@ app.post('/deploy', (req, res) => {
   exec(`cd "${__dirname}" && git pull && npm run build`, (err, stdout) => {
     if (err) { console.error('[DEPLOY] Erreur:', err.message); return }
     console.log('[DEPLOY] Build terminé:\n', stdout.trim())
-    process.exit(0) // Infomaniak redémarre le serveur automatiquement
+    process.exit(1) // Code 1 force le redémarrage automatique par Infomaniak
   })
 })
 
