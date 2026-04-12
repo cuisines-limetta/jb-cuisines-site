@@ -207,17 +207,111 @@ document.querySelectorAll('[data-max]').forEach(hint => {
   update()
 })
 
-// Bouton publier
-document.getElementById('btn-publish')?.addEventListener('click', () => {
-  const modified = document.querySelectorAll('.is-modified')
+// ── Publication réelle via /api/content ───────────────────────────────────────
+
+function buildPayload () {
+  const payload = {}
+  document.querySelectorAll('[data-field].is-modified').forEach(field => {
+    const keys = field.dataset.field.split('.')
+    let node = payload
+    for (let i = 0; i < keys.length - 1; i++) {
+      node[keys[i]] = node[keys[i]] || {}
+      node = node[keys[i]]
+    }
+    node[keys[keys.length - 1]] = field.value
+  })
+  return payload
+}
+
+async function publishContent (token) {
+  const payload = buildPayload()
+  const res = await fetch('/api/content', {
+    method:  'POST',
+    headers: {
+      'Content-Type':  'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(payload),
+  })
+  return res
+}
+
+// Modal de mot de passe admin
+const modalAuth = document.getElementById('modal-auth')
+const modalAuthForm = document.getElementById('modal-auth-form')
+const modalAuthClose = document.getElementById('modal-auth-close')
+const modalAuthError = document.getElementById('modal-auth-error')
+
+function openAuthModal () { if (modalAuth) modalAuth.style.display = 'flex' }
+function closeAuthModal () { if (modalAuth) modalAuth.style.display = 'none' }
+
+modalAuthClose?.addEventListener('click', closeAuthModal)
+document.getElementById('modal-auth-backdrop')?.addEventListener('click', closeAuthModal)
+
+modalAuthForm?.addEventListener('submit', async e => {
+  e.preventDefault()
+  const password = document.getElementById('admin-password').value
+  if (modalAuthError) modalAuthError.style.display = 'none'
+
+  try {
+    const res = await fetch('/api/admin-login', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ password }),
+    })
+    if (!res.ok) {
+      if (modalAuthError) modalAuthError.style.display = 'block'
+      return
+    }
+    const { token } = await res.json()
+    sessionStorage.setItem('admin_token', token)
+    closeAuthModal()
+    document.getElementById('admin-password').value = ''
+    // Relancer la publication maintenant qu'on a le token
+    doPublish(token)
+  } catch {
+    if (modalAuthError) modalAuthError.style.display = 'block'
+  }
+})
+
+async function doPublish (token) {
+  const modified = document.querySelectorAll('[data-field].is-modified')
   if (modified.length === 0) {
     showToast('Aucune modification à publier.')
     return
   }
-  // Simulation — avec Supabase ce sera un vrai appel API
-  modified.forEach(f => f.classList.remove('is-modified'))
-  updatePublishBtn()
-  showToast(`${modified.length} modification${modified.length > 1 ? 's' : ''} publiée${modified.length > 1 ? 's' : ''} avec succès.`)
+  try {
+    const res = await publishContent(token)
+    if (res.status === 401) {
+      // Token expiré ou invalide
+      sessionStorage.removeItem('admin_token')
+      openAuthModal()
+      return
+    }
+    if (!res.ok) {
+      showToast('Erreur serveur — veuillez réessayer.')
+      return
+    }
+    modified.forEach(f => f.classList.remove('is-modified'))
+    updatePublishBtn()
+    showToast(`${modified.length} modification${modified.length > 1 ? 's' : ''} publiée${modified.length > 1 ? 's' : ''} avec succès.`)
+  } catch {
+    showToast('Impossible de joindre le serveur.')
+  }
+}
+
+document.getElementById('btn-publish')?.addEventListener('click', () => {
+  const modified = document.querySelectorAll('[data-field].is-modified')
+  if (modified.length === 0) {
+    showToast('Aucune modification à publier.')
+    return
+  }
+  const token = sessionStorage.getItem('admin_token')
+  if (!token) {
+    openAuthModal()
+  } else {
+    doPublish(token)
+  }
 })
 
 // Preview photo au changement

@@ -1,20 +1,70 @@
 // Serveur Express — Cuisines Limetta
 // Sert le site statique + traite le formulaire de contact via SMTP Infomaniak
+// + API /api/content pour l'éditeur admin
 
-import express         from 'express'
-import nodemailer      from 'nodemailer'
-import path            from 'path'
-import { fileURLToPath } from 'url'
-import { exec }          from 'child_process'
-import { SITE, EMAIL_CLIENT, EMAIL_ADMIN } from './contenu.js'
+import 'dotenv/config'
+import express           from 'express'
+import nodemailer         from 'nodemailer'
+import path               from 'path'
+import { fileURLToPath }  from 'url'
+import { exec }           from 'child_process'
+import { readFileSync, writeFileSync } from 'fs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const app  = express()
 const PORT = process.env.PORT || 3000
 
+// ─── Contenu éditable (content.json) ─────────────────────────────────────────
+const contentPath = path.join(__dirname, 'content.json')
+let siteContent = JSON.parse(readFileSync(contentPath, 'utf8'))
+
+function deepMerge (target, source) {
+  const result = { ...target }
+  for (const key of Object.keys(source)) {
+    if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+      result[key] = deepMerge(target[key] || {}, source[key])
+    } else {
+      result[key] = source[key]
+    }
+  }
+  return result
+}
+
 // ─── Middleware ───────────────────────────────────────────────────────────────
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+// ─── Route GET /api/content — contenu public ─────────────────────────────────
+app.get('/api/content', (req, res) => {
+  res.json(siteContent)
+})
+
+// ─── Route POST /api/content — mise à jour (protégée) ────────────────────────
+app.post('/api/content', (req, res) => {
+  const auth = req.headers.authorization
+  if (!process.env.DEPLOY_TOKEN || auth !== `Bearer ${process.env.DEPLOY_TOKEN}`) {
+    return res.status(401).json({ error: 'Non autorisé.' })
+  }
+  try {
+    siteContent = deepMerge(siteContent, req.body)
+    writeFileSync(contentPath, JSON.stringify(siteContent, null, 2), 'utf8')
+    res.json({ success: true })
+  } catch (err) {
+    console.error('[CONTENT]', err.message)
+    res.status(500).json({ error: 'Erreur lors de la sauvegarde.' })
+  }
+})
+
+// ─── Route POST /api/admin-login — échange un mot de passe contre un token ───
+app.post('/api/admin-login', (req, res) => {
+  const { password } = req.body
+  if (!process.env.DEPLOY_TOKEN || password !== process.env.DEPLOY_TOKEN) {
+    return res.status(401).json({ error: 'Mot de passe incorrect.' })
+  }
+  res.json({ token: process.env.DEPLOY_TOKEN })
+})
+
+// ─── Fichiers statiques ───────────────────────────────────────────────────────
 app.use(express.static(path.join(__dirname, 'dist')))
 
 // ─── Transporteur SMTP Infomaniak ─────────────────────────────────────────────
@@ -42,6 +92,9 @@ app.post('/api/contact', async (req, res) => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Adresse email invalide.' })
   }
+
+  // Lecture du contenu courant (toujours à jour)
+  const { site: SITE, email_client: EMAIL_CLIENT, email_admin: EMAIL_ADMIN } = siteContent
 
   try {
     // ── Email reçu par Jordan ────────────────────────────────────────────────
@@ -87,8 +140,8 @@ app.post('/api/contact', async (req, res) => {
     })
 
     // ── Email de confirmation au client ──────────────────────────────────────
-    const LOGO_URL   = `${SITE.url}/logo%20minimaliste%20vectoris%C3%A9.svg`
-    const styleData  = style ? (EMAIL_CLIENT.styles[style] || EMAIL_CLIENT.styles.autre) : null
+    const LOGO_URL  = `${SITE.url}/logo%20minimaliste%20vectoris%C3%A9.svg`
+    const styleData = style ? (EMAIL_CLIENT.styles[style] || EMAIL_CLIENT.styles.autre) : null
 
     const styleBanner = styleData ? `
       <div style="margin:28px 0 0;border-radius:8px;overflow:hidden;">
@@ -236,5 +289,5 @@ app.get('*', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`✓ ${SITE.nom} — serveur démarré sur http://localhost:${PORT}`)
+  console.log(`✓ ${siteContent.site.nom} — serveur démarré sur http://localhost:${PORT}`)
 })

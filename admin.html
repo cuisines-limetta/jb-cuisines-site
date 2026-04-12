@@ -1317,9 +1317,37 @@ Intervention à Lyon et dans un rayon de 50 km</textarea>
 
   </main>
 
+  <!-- Modal authentification admin (publication de contenu) -->
+  <div class="adm-modal" id="modal-auth" style="display:none">
+    <div class="adm-modal__backdrop" id="modal-auth-backdrop"></div>
+    <div class="adm-modal__panel adm-modal__panel--sm">
+      <div class="adm-modal__header">
+        <h3>Confirmer votre identité</h3>
+        <button class="adm-modal__close" id="modal-auth-close" aria-label="Fermer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <form id="modal-auth-form">
+        <div class="adm-form__group">
+          <label class="adm-form__label" for="admin-password">Mot de passe admin</label>
+          <input class="adm-form__input" type="password" id="admin-password" placeholder="••••••••" autocomplete="current-password" required>
+        </div>
+        <p id="modal-auth-error" style="display:none;color:var(--rouge,#e05252);font-size:13px;margin:0 0 12px;">Mot de passe incorrect.</p>
+        <div class="adm-form__actions">
+          <button type="button" class="btn btn--outline" id="modal-auth-cancel">Annuler</button>
+          <button type="submit" class="btn btn--primary">Publier les modifications</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script type="module">
     import { initTheme } from '/src/ui/theme.js'
     initTheme()
+    // Bouton annuler dans la modal auth
+    document.getElementById('modal-auth-cancel')?.addEventListener('click', () => {
+      document.getElementById('modal-auth').style.display = 'none'
+    })
   </script>
   <script type="module" src="/src/ui/admin.js"></script>
 </body>

@@ -1,0 +1,70 @@
+{
+  "site": {
+    "nom": "Cuisines Limetta",
+    "slogan": "À vos côtés, sans pépins.",
+    "url": "https://cuisines-limetta.com",
+    "telephone": "+33 7 67 01 21 02",
+    "telephoneHref": "tel:+33767012102",
+    "emailContact": "j.bayonas@cuisines-limetta.com",
+    "emailFormulaire": "formulaire@cuisines-limetta.com",
+    "adresse": "410 rue des Rives de l'Ain, 01160 Varambon",
+    "zone": "Lyon & 50 km autour",
+    "prenom": "Jordan",
+    "nom_": "Bayonas",
+    "initiales": "JB"
+  },
+  "seo": {
+    "title": "Cuisines Limetta — Cuisiniste sur mesure Lyon, Ain, Bourg-en-Bresse",
+    "description": "Cuisiniste artisan sur mesure à Lyon et dans l'Ain. Conception, fabrication et pose de cuisines haut de gamme dans un rayon de 50 km. Devis gratuit — Jordan Bayonas."
+  },
+  "hero": {
+    "label": "Cuisiniste artisan — Lyon, Ain & Bourg-en-Bresse",
+    "sub": "Conception 3D, fabrication et pose de cuisines sur mesure haut de gamme, à Lyon, dans l'Ain et dans un rayon de 50 km autour de chez vous.",
+    "cta1": "Demander un devis",
+    "cta2": "Voir nos réalisations"
+  },
+  "intro": {
+    "slogan1": "À vos côtés,",
+    "slogan2": "sans pépins.",
+    "texte": "Nous croyons que la cuisine est le cœur de la maison. C'est pourquoi chaque projet est traité comme une création sur mesure — alliant fonctionnalité, esthétique et durabilité pour un résultat qui vous ressemble."
+  },
+  "about": {
+    "p1": "Cuisiniste artisan basé à Varambon (Ain), j'interviens à Lyon, Bourg-en-Bresse, Ambérieu-en-Bugey et dans tout un rayon de 50 km. Passionné par la menuiserie et le design d'intérieur, je traite chaque projet avec la même rigueur : de la première ébauche jusqu'à la livraison.",
+    "p2": "Mon engagement : une écoute sans filtre, des matériaux choisis avec exigence, et une transparence totale à chaque étape — pour que votre cuisine soit exactement celle que vous aviez imaginée.",
+    "valeurs": [
+      "Matériaux premium sélectionnés avec soin",
+      "Devis détaillé et prix transparent, sans surprises",
+      "Garantie décennale et SAV réactif après livraison",
+      "Intervention à Lyon et dans un rayon de 50 km"
+    ],
+    "badge_ville": "Lyon",
+    "badge_sub": "& 50 km autour"
+  },
+  "contact": {
+    "titre": "Demandez votre devis gratuit",
+    "sub": "Décrivez-nous votre projet et nous revenons vers vous sous 24h pour organiser une première rencontre, sans engagement."
+  },
+  "email_client": {
+    "sujet": "Bonjour {prenom}, votre demande a bien été reçue 🌿",
+    "titre_ligne1": "Bonjour {prenom},",
+    "titre_ligne2": "votre demande est entre de bonnes mains.",
+    "paragraphe1": "Merci de l'intérêt que vous portez à <strong>Cuisines Limetta</strong>. J'ai bien reçu votre demande et je vous recontacterai personnellement dans les <strong>24h</strong> pour organiser un premier échange.",
+    "paragraphe2": "Chaque cuisine que je crée est unique — pensée, fabriquée et posée avec le même soin du détail. J'ai hâte de découvrir votre projet.",
+    "bouton_realisations": "Voir nos réalisations",
+    "bouton_appel": "Nous appeler",
+    "style_sous_titre": "Nous affinerons ensemble vos envies lors de notre première rencontre.",
+    "recap_label": "Votre message",
+    "citation": "« À vos côtés, sans pépins. »",
+    "styles": {
+      "contemporain": { "label": "Contemporain",            "bg": "#24336a", "text": "#ffffff" },
+      "classique":    { "label": "Classique",               "bg": "#8b7355", "text": "#ffffff" },
+      "scandinave":   { "label": "Scandinave",              "bg": "#b2bec3", "text": "#2d3436" },
+      "industriel":   { "label": "Industriel",              "bg": "#2d3436", "text": "#ffffff" },
+      "autre":        { "label": "Style à définir ensemble","bg": "#95c13b", "text": "#ffffff" }
+    }
+  },
+  "email_admin": {
+    "sujet": "Nouvelle demande de devis — {prenom} {nom}",
+    "note": "Répondre directement à cet email pour contacter {prenom} {nom}."
+  }
+}
