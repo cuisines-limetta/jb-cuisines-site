@@ -5,6 +5,7 @@ import { initCounters } from './animations/counters.js'
 import { initForm } from './ui/form.js'
 import { initScrollVideo } from './animations/scrollVideo.js'
 import { initTheme } from './ui/theme.js'
+import { initFaq }   from './ui/faq.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   initTheme()
@@ -13,4 +14,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal()
   initCounters()
   initForm()
+  initFaq()
 })
