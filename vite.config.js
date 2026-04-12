@@ -10,9 +10,10 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
+        main:      resolve(__dirname, 'index.html'),
         connexion: resolve(__dirname, 'connexion.html'),
         dashboard: resolve(__dirname, 'tableau-de-bord.html'),
+        admin:     resolve(__dirname, 'admin.html'),
       }
     }
   }

@@ -1,0 +1,728 @@
+/* ============================================
+   Admin — styles spécifiques
+   ============================================ */
+
+/* Badge "Admin" dans le logo sidebar */
+.adm-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--vert);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 20px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* Labels de section dans la nav */
+.db-nav__section-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gris);
+  padding: 20px 20px 6px;
+  opacity: 0.6;
+}
+
+.db-nav__section-label:first-child {
+  padding-top: 8px;
+}
+
+.db-nav__badge--green {
+  background: var(--vert);
+}
+
+/* ── Barre de recherche ─────────────────────── */
+.adm-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--fond);
+  border: 1px solid var(--gris-clair);
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+}
+
+[data-theme="dark"] .adm-search-bar {
+  background: #1a1c18;
+  border-color: rgba(255,255,255,0.08);
+}
+
+.adm-search-bar svg {
+  width: 16px;
+  height: 16px;
+  color: var(--gris);
+  flex-shrink: 0;
+}
+
+.adm-search-bar input {
+  border: none;
+  background: none;
+  font-family: var(--font-corps);
+  font-size: 14px;
+  color: var(--texte);
+  width: 100%;
+  outline: none;
+}
+
+.adm-search-bar input::placeholder { color: var(--gris); }
+
+/* ── Table clients ──────────────────────────── */
+.adm-table-wrap {
+  padding: 0;
+  overflow-x: auto;
+}
+
+.adm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.adm-table thead th {
+  text-align: left;
+  padding: 14px 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gris);
+  border-bottom: 1px solid var(--gris-clair);
+}
+
+[data-theme="dark"] .adm-table thead th {
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+
+.adm-table tbody tr {
+  border-bottom: 1px solid var(--gris-clair);
+  transition: background var(--transition);
+}
+
+[data-theme="dark"] .adm-table tbody tr {
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+.adm-table tbody tr:last-child { border-bottom: none; }
+
+.adm-table tbody tr:hover { background: var(--fond); }
+
+[data-theme="dark"] .adm-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+.adm-table tbody td {
+  padding: 14px 20px;
+  color: var(--texte);
+  vertical-align: middle;
+}
+
+.adm-table__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.adm-table__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--marine);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.adm-table__action {
+  background: none;
+  border: 1px solid var(--gris-clair);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: var(--font-corps);
+  font-size: 13px;
+  color: var(--texte);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.adm-table__action:hover {
+  background: var(--marine);
+  border-color: var(--marine);
+  color: #fff;
+}
+
+/* ── Badges status supplémentaires ──────────── */
+.status-badge--grey {
+  background: rgba(136,136,128,0.12);
+  color: var(--gris);
+}
+
+/* ── Modals ─────────────────────────────────── */
+.adm-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.adm-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+}
+
+.adm-modal__panel {
+  position: relative;
+  background: var(--blanc);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 760px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--ombre-forte);
+}
+
+[data-theme="dark"] .adm-modal__panel {
+  background: #1a1c18;
+}
+
+.adm-modal__panel--sm { max-width: 480px; }
+
+.adm-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--gris-clair);
+}
+
+[data-theme="dark"] .adm-modal__header {
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+
+.adm-modal__header h2 {
+  font-family: var(--font-titre);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.adm-modal__close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--fond);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gris);
+  transition: all var(--transition);
+}
+
+.adm-modal__close:hover { background: var(--gris-clair); color: var(--texte); }
+
+.adm-modal__close svg { width: 14px; height: 14px; }
+
+.adm-modal__body { padding: 24px 28px; }
+
+/* Fiche client */
+.adm-fiche-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.adm-fiche-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.adm-fiche-info li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--gris-clair);
+}
+
+[data-theme="dark"] .adm-fiche-info li {
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+.adm-fiche-info li:last-child { border-bottom: none; padding-bottom: 0; }
+.adm-fiche-info li span { color: var(--gris); }
+
+/* Formulaire nouveau client */
+.adm-form .form-group { margin-bottom: 16px; }
+.adm-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.adm-form__note {
+  display: flex;
+  gap: 10px;
+  background: rgba(149,193,59,0.1);
+  border-left: 3px solid var(--vert);
+  padding: 12px 14px;
+  border-radius: 0 6px 6px 0;
+  font-size: 13px;
+  color: var(--gris);
+  margin: 20px 0;
+}
+
+.adm-form__note svg { width: 16px; height: 16px; color: var(--vert); flex-shrink: 0; margin-top: 1px; }
+
+.adm-form__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.adm-btn-sm {
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+}
+
+/* ── Fil d'activité ─────────────────────────── */
+.adm-activity { display: flex; flex-direction: column; gap: 0; }
+
+.adm-activity__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gris-clair);
+}
+
+[data-theme="dark"] .adm-activity__item {
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+.adm-activity__item:last-child { border-bottom: none; }
+
+.adm-activity__icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.adm-activity__icon svg { width: 14px; height: 14px; }
+
+.adm-activity__icon--green { background: rgba(149,193,59,0.15); color: var(--vert); }
+.adm-activity__icon--blue  { background: rgba(36,51,106,0.1);   color: var(--marine); }
+.adm-activity__icon--orange{ background: rgba(255,152,0,0.12);  color: #e65100; }
+
+[data-theme="dark"] .adm-activity__icon--blue { background: rgba(99,131,255,0.15); color: #8fa4ff; }
+
+.adm-activity__body { flex: 1; }
+.adm-activity__body p { font-size: 13px; color: var(--texte); margin-bottom: 2px; }
+.adm-activity__body time { font-size: 12px; color: var(--gris); }
+
+/* ── Liste projets dashboard ────────────────── */
+.adm-projects-list { display: flex; flex-direction: column; gap: 12px; }
+
+.adm-project-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.adm-project-row__info {
+  width: 160px;
+  flex-shrink: 0;
+}
+
+.adm-project-row__info strong { display: block; font-size: 13px; }
+.adm-project-row__info span { font-size: 12px; color: var(--gris); }
+
+.adm-project-row__bar {
+  flex: 1;
+  height: 4px;
+  background: var(--gris-clair);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.adm-project-row__fill {
+  height: 100%;
+  background: var(--marine);
+  border-radius: 4px;
+}
+
+/* ── Filtre onglets ─────────────────────────── */
+.adm-filter-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--fond);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.adm-filter-tab {
+  background: none;
+  border: none;
+  font-family: var(--font-corps);
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--gris);
+  transition: all var(--transition);
+}
+
+.adm-filter-tab.active {
+  background: var(--blanc);
+  color: var(--texte);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+[data-theme="dark"] .adm-filter-tab.active {
+  background: #2a2d26;
+}
+
+/* ── Cartes projets ─────────────────────────── */
+.adm-project-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+.adm-project-card {
+  background: var(--blanc);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--ombre);
+  border: 1px solid var(--gris-clair);
+}
+
+[data-theme="dark"] .adm-project-card {
+  background: #1a1c18;
+  border-color: rgba(255,255,255,0.08);
+}
+
+.adm-project-card--done { opacity: 0.6; }
+.adm-project-card--done[data-status="termine"] { display: none; }
+.adm-project-card--done.visible { display: block; opacity: 0.6; }
+
+.adm-project-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.adm-project-card__header h3 { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+.adm-project-card__header span { font-size: 13px; color: var(--gris); }
+
+.adm-project-card__progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.adm-project-card__bar {
+  flex: 1;
+  height: 4px;
+  background: var(--gris-clair);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.adm-project-card__bar div {
+  height: 100%;
+  background: var(--marine);
+  border-radius: 4px;
+}
+
+.adm-project-card__progress span { font-size: 12px; color: var(--gris); width: 34px; text-align: right; }
+
+.adm-project-card__steps {
+  font-size: 11px;
+  margin-bottom: 16px;
+}
+
+.adm-project-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--gris-clair);
+  font-size: 13px;
+  color: var(--gris);
+}
+
+[data-theme="dark"] .adm-project-card__footer {
+  border-top-color: rgba(255,255,255,0.08);
+}
+
+/* ── Messagerie admin ───────────────────────── */
+.adm-chat-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+  height: calc(100vh - 200px);
+  min-height: 500px;
+  background: var(--blanc);
+  border-radius: 12px;
+  box-shadow: var(--ombre);
+  border: 1px solid var(--gris-clair);
+  overflow: hidden;
+}
+
+[data-theme="dark"] .adm-chat-layout {
+  background: #1a1c18;
+  border-color: rgba(255,255,255,0.08);
+}
+
+.adm-chat-list {
+  border-right: 1px solid var(--gris-clair);
+  overflow-y: auto;
+}
+
+[data-theme="dark"] .adm-chat-list {
+  border-right-color: rgba(255,255,255,0.08);
+}
+
+.adm-chat-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--gris-clair);
+  transition: background var(--transition);
+  position: relative;
+}
+
+[data-theme="dark"] .adm-chat-list__item {
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+.adm-chat-list__item:hover { background: var(--fond); }
+.adm-chat-list__item.active { background: rgba(36,51,106,0.06); }
+
+[data-theme="dark"] .adm-chat-list__item.active { background: rgba(255,255,255,0.05); }
+
+.adm-chat-list__body { flex: 1; min-width: 0; }
+
+.adm-chat-list__meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+
+.adm-chat-list__meta strong { font-size: 13px; }
+.adm-chat-list__meta time { font-size: 11px; color: var(--gris); }
+
+.adm-chat-list__body p { font-size: 12px; color: var(--gris); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.adm-chat-list__item--unread .adm-chat-list__body p { color: var(--texte); font-weight: 500; }
+
+.adm-chat-list__unread {
+  background: var(--marine);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.adm-chat-panel {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+.adm-chat-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--gris-clair);
+}
+
+[data-theme="dark"] .adm-chat-panel__header {
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+
+.adm-chat-panel__header strong { display: block; font-size: 14px; }
+.adm-chat-panel__header span { font-size: 12px; color: var(--gris); }
+
+/* ── Demandes de devis ──────────────────────── */
+.adm-devis-list { display: flex; flex-direction: column; gap: 16px; }
+
+.adm-devis-card {
+  background: var(--blanc);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--ombre);
+  border: 1px solid var(--gris-clair);
+  border-left-width: 4px;
+}
+
+[data-theme="dark"] .adm-devis-card {
+  background: #1a1c18;
+  border-color: rgba(255,255,255,0.08);
+  border-left-color: rgba(255,255,255,0.08);
+}
+
+.adm-devis-card--new { border-left-color: var(--vert); }
+.adm-devis-card--processing { border-left-color: var(--marine); }
+.adm-devis-card--done { border-left-color: var(--gris-clair); opacity: 0.7; }
+
+.adm-devis-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.adm-devis-card__header h3 { font-size: 16px; font-weight: 500; margin-top: 6px; }
+
+.adm-devis-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--gris);
+  margin-bottom: 12px;
+}
+
+.adm-devis-card__message {
+  font-size: 14px;
+  color: var(--texte);
+  font-style: italic;
+  background: var(--fond);
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+[data-theme="dark"] .adm-devis-card__message { background: rgba(255,255,255,0.04); }
+
+.adm-devis-card__actions { display: flex; gap: 10px; }
+
+/* ── Galerie admin ──────────────────────────── */
+.adm-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.adm-gallery-item {
+  background: var(--blanc);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--ombre);
+  border: 1px solid var(--gris-clair);
+  position: relative;
+}
+
+[data-theme="dark"] .adm-gallery-item {
+  background: #1a1c18;
+  border-color: rgba(255,255,255,0.08);
+}
+
+.adm-gallery-item__img {
+  aspect-ratio: 4/3;
+  width: 100%;
+}
+
+.adm-gallery-item__img.gallery__placeholder--1,
+.adm-gallery-item__img.gallery__placeholder--2,
+.adm-gallery-item__img.gallery__placeholder--3,
+.adm-gallery-item__img.gallery__placeholder--4 {
+  height: auto;
+  border-radius: 0;
+}
+
+.adm-gallery-item__meta {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.adm-gallery-item__meta p { font-size: 13px; color: var(--texte); }
+
+.adm-gallery-item__actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.adm-gallery-item:hover .adm-gallery-item__actions { opacity: 1; }
+
+.adm-gallery-item__btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(4px);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--texte);
+  transition: all var(--transition);
+}
+
+.adm-gallery-item__btn svg { width: 14px; height: 14px; }
+.adm-gallery-item__btn:hover { background: var(--marine); color: #fff; }
+.adm-gallery-item__btn--delete:hover { background: #e53935; color: #fff; }
+
+.adm-gallery-item--add .adm-gallery-item__add-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--fond);
+  border: 2px dashed var(--gris-clair);
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--gris);
+  font-size: 13px;
+  transition: all var(--transition);
+  aspect-ratio: 4/3;
+}
+
+.adm-gallery-item--add .adm-gallery-item__add-zone svg { width: 24px; height: 24px; }
+.adm-gallery-item--add .adm-gallery-item__add-zone:hover { background: rgba(149,193,59,0.08); border-color: var(--vert); color: var(--vert); }
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 900px) {
+  .adm-fiche-grid { grid-template-columns: 1fr; }
+  .adm-chat-layout { grid-template-columns: 1fr; height: auto; }
+  .adm-chat-list { border-right: none; border-bottom: 1px solid var(--gris-clair); max-height: 240px; }
+  .adm-project-cards { grid-template-columns: 1fr; }
+  .adm-filter-tabs { display: none; }
+  .adm-form .form-row { grid-template-columns: 1fr; }
+}
