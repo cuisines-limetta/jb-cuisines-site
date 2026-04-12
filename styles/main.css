@@ -3389,17 +3389,18 @@ select:focus {
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
+  width: 100%;
   padding: 18px 0;
+  background: none;
+  border: none;
   font-family: var(--font-corps);
   font-size: 15px;
   font-weight: 400;
   color: var(--texte);
   cursor: pointer;
-  list-style: none;
+  text-align: left;
   line-height: 1.5;
 }
-
-.faq__question::-webkit-details-marker { display: none; }
 
 .faq__chevron {
   flex-shrink: 0;
@@ -3409,7 +3410,7 @@ select:focus {
   background: var(--marine);
   position: relative;
   margin-top: 2px;
-  transition: background var(--transition), transform var(--transition);
+  transition: background var(--transition);
 }
 
 .faq__chevron::before,
@@ -3424,34 +3425,51 @@ select:focus {
 }
 
 .faq__chevron::before { width: 8px; height: 1.5px; }
-.faq__chevron::after  { width: 1.5px; height: 8px; transition: transform var(--transition); }
+.faq__chevron::after  { width: 1.5px; height: 8px; transition: transform 0.36s cubic-bezier(0.4,0,0.2,1); }
 
-details[open] .faq__chevron {
+.faq__item.is-open .faq__chevron {
   background: var(--vert);
 }
 
-details[open] .faq__chevron::after {
+.faq__item.is-open .faq__chevron::after {
   transform: translate(-50%, -50%) rotate(90deg);
 }
 
+/* Trick grid : 0fr → 1fr, aucun calcul JS de hauteur */
 .faq__answer {
-  padding: 0 0 20px;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.36s cubic-bezier(0.4,0,0.2,1);
+}
+
+.faq__item.is-open .faq__answer {
+  grid-template-rows: 1fr;
+}
+
+.faq__answer-inner {
+  overflow: hidden;
   font-size: 14px;
   color: var(--gris);
   line-height: 1.75;
+  padding-bottom: 0;
+  transition: padding-bottom 0.36s cubic-bezier(0.4,0,0.2,1);
 }
 
-.faq__answer p + p { margin-top: 10px; }
+.faq__item.is-open .faq__answer-inner {
+  padding-bottom: 20px;
+}
 
-.faq__answer ol {
+.faq__answer-inner p + p { margin-top: 10px; }
+
+.faq__answer-inner ol {
   list-style: decimal;
   padding-left: 20px;
   margin: 10px 0;
 }
 
-.faq__answer ol li { margin-bottom: 4px; }
+.faq__answer-inner ol li { margin-bottom: 4px; }
 
-.faq__answer a {
+.faq__answer-inner a {
   color: var(--vert);
   text-decoration: underline;
 }
