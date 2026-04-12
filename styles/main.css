@@ -1285,8 +1285,9 @@ input:focus, textarea:focus {
   }
 
   .about__img-wrap {
-    max-width: 480px;
-    aspect-ratio: 3/2;
+    max-width: 360px;
+    margin: 0 auto;
+    aspect-ratio: 3/4;
   }
 
   .contact__grid {
