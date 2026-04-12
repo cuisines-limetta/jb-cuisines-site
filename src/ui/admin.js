@@ -22,6 +22,7 @@ const VIEW_LABELS = {
   messagerie: 'Messagerie',
   devis:      'Demandes de devis',
   galerie:    'Galerie',
+  contenu:    'Contenu du site',
 }
 
 function switchView (viewId) {
@@ -162,6 +163,88 @@ document.querySelectorAll('.adm-chat-list__item').forEach(item => {
     item.classList.add('active')
     item.querySelector('.adm-chat-list__unread')?.remove()
     item.classList.remove('adm-chat-list__item--unread')
+  })
+})
+
+// ── Éditeur de contenu ────────────────────────────────────────────────────────
+
+// Onglets contenu
+document.querySelectorAll('.adm-content-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.adm-content-tab').forEach(t => t.classList.remove('active'))
+    document.querySelectorAll('.adm-content-panel').forEach(p => p.classList.remove('active'))
+    tab.classList.add('active')
+    document.getElementById('tab-' + tab.dataset.tab)?.classList.add('active')
+  })
+})
+
+// Marquer les champs modifiés
+document.querySelectorAll('[data-field]').forEach(field => {
+  const original = field.value
+  field.addEventListener('input', () => {
+    field.classList.toggle('is-modified', field.value !== original)
+    updatePublishBtn()
+  })
+})
+
+function updatePublishBtn () {
+  const hasChanges = document.querySelectorAll('.is-modified').length > 0
+  const btn = document.getElementById('btn-publish')
+  if (btn) btn.classList.toggle('btn--has-changes', hasChanges)
+}
+
+// Compteur de caractères SEO
+document.querySelectorAll('[data-max]').forEach(hint => {
+  const field = hint.previousElementSibling
+  if (!field) return
+  const max = parseInt(hint.dataset.max)
+  const update = () => {
+    const len = field.value.length
+    hint.textContent = `${len} / ${max} caractères recommandés`
+    hint.classList.toggle('over', len > max)
+  }
+  field.addEventListener('input', update)
+  update()
+})
+
+// Bouton publier
+document.getElementById('btn-publish')?.addEventListener('click', () => {
+  const modified = document.querySelectorAll('.is-modified')
+  if (modified.length === 0) {
+    showToast('Aucune modification à publier.')
+    return
+  }
+  // Simulation — avec Supabase ce sera un vrai appel API
+  modified.forEach(f => f.classList.remove('is-modified'))
+  updatePublishBtn()
+  showToast(`${modified.length} modification${modified.length > 1 ? 's' : ''} publiée${modified.length > 1 ? 's' : ''} avec succès.`)
+})
+
+// Preview photo au changement
+document.querySelectorAll('.adm-upload-input').forEach(input => {
+  input.addEventListener('change', () => {
+    if (!input.files?.length) return
+    const file = input.files[0]
+    const reader = new FileReader()
+    reader.onload = e => {
+      const preview = input.closest('.adm-photo-editor, .adm-gallery-editor__add')
+                          ?.querySelector('.adm-photo-preview, .adm-gallery-editor__thumb')
+      if (!preview) return
+      preview.innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;">`
+      showToast('Photo sélectionnée — cliquez sur "Publier" pour l\'appliquer.')
+    }
+    reader.readAsDataURL(file)
+  })
+})
+
+// Suppression photos galerie
+document.querySelectorAll('.adm-gallery-editor__del').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.adm-gallery-editor__item')
+    item.style.transition = 'opacity 0.2s, transform 0.2s'
+    item.style.opacity = '0'
+    item.style.transform = 'translateX(8px)'
+    setTimeout(() => item.remove(), 200)
   })
 })
 
