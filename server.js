@@ -4,6 +4,7 @@
 
 import 'dotenv/config'
 import express           from 'express'
+import { installLaunchGate } from './launch/gate.js'
 import nodemailer         from 'nodemailer'
 import path               from 'path'
 import { fileURLToPath }  from 'url'
@@ -33,6 +34,7 @@ function deepMerge (target, source) {
 // ─── Middleware ───────────────────────────────────────────────────────────────
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+installLaunchGate(app)
 
 // ─── Route GET /api/content — contenu public ─────────────────────────────────
 app.get('/api/content', (req, res) => {
@@ -106,7 +108,7 @@ app.post('/api/contact', async (req, res) => {
       html: `
         <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:32px;background:#f7f6f1;">
           <div style="background:#24336a;padding:24px 32px;border-radius:8px 8px 0 0;">
-            <h1 style="color:#fff;margin:0;font-size:20px;font-weight:400;">Nouvelle demande de devis</h1>
+            <h1 style="color:#fff;margin:0;font-size:20px;font-weight:400;">Nouvelle demande de rendez-vous</h1>
             <p style="color:rgba(255,255,255,0.6);margin:6px 0 0;font-size:14px;">${SITE.url}</p>
           </div>
           <div style="background:#fff;padding:32px;border-radius:0 0 8px 8px;border:1px solid #e8e7e0;border-top:none;">
@@ -204,7 +206,7 @@ app.post('/api/contact', async (req, res) => {
       <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
           <td style="padding-right:8px;" width="50%">
-            <a href="${SITE.url}/#realisations"
+            <a href="${SITE.url}/#inspirations"
                style="display:block;text-align:center;padding:16px 20px;background:#24336a;color:#fff;text-decoration:none;border-radius:6px;font-size:14px;font-weight:500;letter-spacing:0.03em;">
               ${EMAIL_CLIENT.bouton_realisations}
             </a>

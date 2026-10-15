@@ -16,14 +16,15 @@ export function initForm() {
     let valid = true
     required.forEach(field => {
       field.classList.remove('error')
-      if (!field.value.trim()) {
+      if (!field.value.trim() || !field.checkValidity()) {
         field.classList.add('error')
         valid = false
       }
     })
 
     if (!valid) {
-      showMessage(form, 'Veuillez remplir tous les champs obligatoires.', 'error')
+      showMessage(form, 'Vérifiez les champs obligatoires et votre adresse email.', 'error')
+      form.querySelector('.error')?.focus()
       return
     }
 
@@ -35,12 +36,12 @@ export function initForm() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          prenom:    form.prenom.value.trim(),
-          nom:       form.nom.value.trim(),
-          email:     form.email.value.trim(),
-          telephone: form.telephone?.value.trim() || '',
-          style:     form.style?.value || '',
-          message:   form.message.value.trim(),
+          prenom:    form.elements.namedItem('prenom').value.trim(),
+          nom:       form.elements.namedItem('nom').value.trim(),
+          email:     form.elements.namedItem('email').value.trim(),
+          telephone: form.elements.namedItem('telephone')?.value.trim() || '',
+          style:     form.elements.namedItem('style')?.value || '',
+          message:   form.elements.namedItem('message').value.trim(),
         }),
       })
 
@@ -49,13 +50,13 @@ export function initForm() {
       if (!res.ok) throw new Error(data.error || 'Erreur serveur')
 
       form.reset()
-      showMessage(form, 'Votre demande a bien été envoyée ! Je vous recontacterai sous 24h.', 'success')
+      showMessage(form, 'Votre demande a bien été envoyée. Je vous recontacte personnellement pour convenir d’un rendez-vous.', 'success')
 
     } catch (err) {
       showMessage(form, err.message || 'Une erreur est survenue. Contactez-nous directement par téléphone.', 'error')
     } finally {
       btn.disabled = false
-      btnText.textContent = 'Envoyer ma demande'
+      btnText.textContent = 'Demander un rendez-vous'
     }
   })
 
@@ -72,6 +73,7 @@ function showMessage(form, text, type) {
   const msg = document.createElement('p')
   msg.className = `form-message form-message--${type}`
   msg.textContent = text
+  msg.setAttribute('role', type === 'error' ? 'alert' : 'status')
 
   Object.assign(msg.style, {
     marginTop:    '16px',

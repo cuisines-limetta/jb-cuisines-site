@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <script>
+    history.scrollRestoration = 'manual';
+    if (performance.getEntriesByType('navigation')[0]?.type !== 'back_forward') {
+      if (location.hash) history.replaceState(history.state, '', location.pathname + location.search);
+      window.addEventListener('pageshow', function (event) {
+        if (!event.persisted) window.scrollTo({top:0,left:0,behavior:'instant'});
+      }, {once:true});
+    }
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cuisines Limetta — Cuisiniste sur mesure Lyon, Ain, Bourg-en-Bresse</title>
-  <meta name="description" content="Cuisiniste artisan sur mesure à Lyon et dans l'Ain. Conception, fabrication et pose de cuisines haut de gamme dans un rayon de 50 km. Devis gratuit — Jordan Bayonas.">
+  <title>Cuisines Limetta — Votre cuisiniste à domicile dans l’Ain</title>
+  <meta name="description" content="Avec Jordan Bayonas, concevez votre cuisine chez vous : écoute, étude 3D, meubles de fabrication française et accompagnement du projet. Basé à Varambon, dans l’Ain.">
   <link rel="canonical" href="https://cuisines-limetta.com/">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/x-icon" href="/favicon-dark.ico" media="(prefers-color-scheme: dark)">
@@ -13,58 +22,43 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cuisines-limetta.com/">
-  <meta property="og:title" content="Cuisines Limetta — Cuisiniste sur mesure Lyon & Ain">
-  <meta property="og:description" content="Cuisiniste artisan sur mesure à Lyon et dans l'Ain. Conception, fabrication et pose de cuisines haut de gamme. Devis gratuit.">
-  <meta property="og:image" content="https://cuisines-limetta.com/og-image.jpg">
+  <meta property="og:title" content="Cuisines Limetta — Votre cuisiniste à domicile dans l’Ain">
+  <meta property="og:description" content="Avec Jordan Bayonas, concevez votre cuisine chez vous : écoute, étude 3D, meubles de fabrication française et accompagnement du projet. Basé à Varambon, dans l’Ain.">
+  <meta property="og:image" content="https://cuisines-limetta.com/inspiration-cuisine-naturelle.webp">
   <meta property="og:locale" content="fr_FR">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/fonts.css">
   <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/actualisation.css">
+  <link rel="stylesheet" href="/styles/experience.css">
+  <link rel="stylesheet" href="/styles/mobile-refinement.css">
+  <link rel="stylesheet" href="/styles/mobile-app.css">
   <script>(function(){var t=localStorage.getItem('cl_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;}());</script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-07FH3DK7GN"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-07FH3DK7GN');</script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Cuisines Limetta",
-    "description": "Cuisiniste artisan sur mesure à Varambon, près de Lyon. Conception, fabrication et pose de cuisines haut de gamme dans un rayon de 50 km autour de Lyon.",
-    "url": "https://cuisines-limetta.com",
-    "telephone": "+33767012102",
-    "email": "j.bayonas@cuisines-limetta.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "410 rue des Rives de l'Ain",
-      "addressLocality": "Varambon",
-      "postalCode": "01160",
-      "addressCountry": "FR"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 46.0,
-      "longitude": 5.37
-    },
-    "areaServed": {
-      "@type": "GeoCircle",
-      "geoMidpoint": {
-        "@type": "GeoCoordinates",
-        "latitude": 45.75,
-        "longitude": 4.85
-      },
-      "geoRadius": "50000"
-    },
-    "priceRange": "€€€",
-    "image": "https://cuisines-limetta.com/logo%20minimaliste%20vectoris%C3%A9.svg",
-    "sameAs": [
-      "https://www.cuisines-limetta.com"
-    ]
-  }
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Cuisines Limetta",
+  "description": "Avec Jordan Bayonas, concevez votre cuisine chez vous : écoute, étude 3D, meubles de fabrication française et accompagnement du projet. Basé à Varambon, dans l’Ain.",
+  "url": "https://cuisines-limetta.com",
+  "telephone": "+33767012102",
+  "email": "j.bayonas@cuisines-limetta.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "410 rue des Rives de l’Ain",
+    "addressLocality": "Varambon",
+    "postalCode": "01160",
+    "addressCountry": "FR"
+  },
+  "image": "https://cuisines-limetta.com/jordan-bayonas-flyer.webp"
+}
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#intro">Aller au contenu</a>
 
   <!-- Navigation -->
   <nav class="nav" id="nav">
@@ -73,10 +67,9 @@
         <img src="/logo%20minimaliste%20vectoris%C3%A9.svg" alt="Cuisines Limetta">
       </a>
       <ul class="nav__links">
-        <li><a href="#prestations">Prestations</a></li>
-        <li><a href="#realisations">Réalisations</a></li>
+        <li><a href="#experience-vr">L’expérience VR</a></li><li><a href="#prestations">Votre projet</a></li>
+        <li><a href="#inspirations">Nos cuisines</a></li>
         <li><a href="#a-propos">À propos</a></li>
-        <li><a href="#contact" class="nav__cta">Devis gratuit</a></li>
         <li>
           <button class="theme-toggle" aria-label="Passer en mode sombre">
             <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
@@ -88,462 +81,209 @@
             </svg>
           </button>
         </li>
-        <li><a href="/connexion.html" class="nav__client">Mon espace
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <circle cx="10" cy="7" r="3"/>
-            <path d="M3 17c0-3.3 3.1-6 7-6s7 2.7 7 6"/>
-          </svg>
-        </a></li>
       </ul>
+      <span class="nav__appointment-slot" id="nav-appointment-slot" aria-hidden="true"></span>
       <button class="nav__burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
     <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
       <ul>
-        <li><a href="#prestations">Prestations</a></li>
-        <li><a href="#realisations">Réalisations</a></li>
+        <li><a href="#experience-vr">L’expérience VR</a></li><li><a href="#prestations">Votre projet</a></li>
+        <li><a href="#inspirations">Nos cuisines</a></li>
         <li><a href="#a-propos">À propos</a></li>
-        <li><a href="#contact">Devis gratuit</a></li>
-        <li><a href="/connexion.html">Mon espace client</a></li>
+        <li><a href="#contact">Prenons rendez-vous</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero scroll-scrubbing wrapper -->
+  <main>
   <div class="hero-scroll-wrapper" id="hero-wrapper">
-  <section class="hero" id="hero">
-    <div class="hero__video-wrap">
-      <video class="hero__video" id="hero-video" muted autoplay loop playsinline preload="auto">
-        <source src="/Je_veux_que_lamnagement_intrie_Kling_30__14193.mp4" type="video/mp4">
-      </video>
-      <canvas class="hero__canvas" id="hero-canvas"></canvas>
-      <div class="hero__overlay"></div>
-
-      <!-- Étapes du projet — apparaissent progressivement au scroll -->
-      <div class="hero-steps" id="hero-steps" aria-hidden="true">
-        <div class="hero-step" data-step="0">
-          <div class="hero-step__body">
-            <span class="hero-step__num">01</span>
-            <h3 class="hero-step__title">Étude du besoin</h3>
-            <p class="hero-step__desc">Visite à domicile, analyse de votre espace et de vos envies pour définir ensemble le projet idéal.</p>
-          </div>
-        </div>
-        <div class="hero-step" data-step="1">
-          <div class="hero-step__body">
-            <span class="hero-step__num">02</span>
-            <h3 class="hero-step__title">Conception 3D</h3>
-            <p class="hero-step__desc">Plans et rendus 3D photo-réalistes pour visualiser votre future cuisine avant toute fabrication.</p>
-          </div>
-        </div>
-        <div class="hero-step" data-step="2">
-          <div class="hero-step__body">
-            <span class="hero-step__num">03</span>
-            <h3 class="hero-step__title">Fabrication & Pose</h3>
-            <p class="hero-step__desc">Fabrication sur mesure et installation soignée par nos artisans, dans les délais convenus.</p>
-          </div>
-        </div>
-        <div class="hero-step" data-step="3">
-          <div class="hero-step__body">
-            <span class="hero-step__num">04</span>
-            <h3 class="hero-step__title">SAV & Garanties</h3>
-            <p class="hero-step__desc">Garantie décennale et service après-vente réactif pour votre tranquillité d'esprit sur le long terme.</p>
-          </div>
-        </div>
+    <section class="hero" id="hero" aria-label="Votre cuisine prend forme">
+      <div class="hero__content">
+        <p class="hero__label" data-content="hero.label">Votre cuisiniste indépendant à domicile</p>
+        <h1 class="hero__title"><span data-content="hero.titre">Le sur-mesure français,</span> <span data-content="hero.accent">à prix juste.</span></h1>
+        <p class="hero__sub" data-content="hero.sub">Une cuisine pensée autour de vous. Je viens chez vous pour la concevoir ensemble et vous aider à vous projeter.</p>
+        <div class="hero__actions"><span class="hero__appointment-slot" id="hero-appointment-slot"><a href="#contact-start" id="appointment-cta" class="btn btn--primary" data-content="hero.cta1">Parlons de votre cuisine</a></span><a href="#projection" class="hero__secondary" data-content="hero.cta2">Explorer les possibilités</a></div>
+        <p class="hero__note" data-content="hero.note">Étude 3D et devis gratuits, sans engagement.</p>
       </div>
-
-      <!-- Pastilles de progression -->
-      <div class="hero-steps-progress" id="hero-steps-progress">
-        <div class="hero-steps-progress__dot"></div>
-        <div class="hero-steps-progress__dot"></div>
-        <div class="hero-steps-progress__dot"></div>
-        <div class="hero-steps-progress__dot"></div>
-      </div>
-
-      <!-- Indicateur de chargement -->
-      <div class="hero-loading" id="hero-loading">
-        <div class="hero-loading__track">
-          <div class="hero-loading__bar" id="hero-loading-bar"></div>
+      <div class="hero__visual">
+        <div class="hero__video-wrap">
+          <video class="hero__video" id="hero-video" muted playsinline preload="none" poster="/cuisine-bleue-apres.webp" aria-label="Animation d’une cuisine bleue qui prend forme" data-src="/cuisine-bleue-scroll.mp4"></video>
         </div>
-        <span class="hero-loading__label">Préparation de l'expérience…</span>
+        <div class="hero__film-caption"><span id="film-instruction">Imaginez ce que votre pièce peut devenir.</span><a href="#a-propos">Rencontrer Jordan ↓</a></div>
+        <div class="hero__progress" aria-hidden="true"><span id="film-progress"></span></div>
+        <button class="film-toggle" id="film-toggle" type="button" hidden>Désactiver l’animation</button>
       </div>
-    </div>
-
-    <div class="hero__content">
-      <p class="hero__label reveal" data-content="hero.label">Cuisiniste artisan — Lyon, Ain & Bourg-en-Bresse</p>
-      <p class="hero__sub reveal" data-content="hero.sub">
-        Conception 3D, fabrication et pose de cuisines sur mesure haut de gamme,<br>
-        à Lyon, dans l'Ain et dans un rayon de 50 km autour de chez vous.
-      </p>
-      <div class="hero__actions reveal">
-        <a href="#contact" class="btn btn--primary" data-content="hero.cta1">Demander un devis</a>
-        <a href="#realisations" class="btn btn--ghost" data-content="hero.cta2">Voir nos réalisations</a>
-      </div>
-    </div>
-
-    <button class="hero__scroll" id="scroll-down" aria-label="Défiler vers le bas">
-      <span>Découvrir</span>
-      <div class="hero__scroll-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M12 5v14M5 12l7 7 7-7"/>
-        </svg>
-      </div>
-    </button>
-  </section>
-  </div><!-- fin hero-scroll-wrapper -->
-
-  <!-- Slogan + Intro -->
-  <section class="intro" id="intro">
-    <div class="intro__slogan reveal">
-      <span data-content="intro.slogan1">À vos côtés,</span>
-      <em data-content="intro.slogan2">sans pépins.</em>
-    </div>
-    <div class="container">
-      <div class="intro__grid">
-        <div class="intro__text reveal">
-          <span class="label">Notre philosophie</span>
-          <h2>Chaque cuisine est une <em>œuvre unique</em></h2>
-          <p data-content="intro.texte">Nous croyons que la cuisine est le cœur de la maison. C'est pourquoi chaque projet est traité comme une création sur mesure — alliant fonctionnalité, esthétique et durabilité pour un résultat qui vous ressemble.</p>
-          <a href="#a-propos" class="link-arrow">En savoir plus <span>→</span></a>
-        </div>
-        <div class="intro__stats">
-          <div class="stat reveal">
-            <span class="stat__number">100</span>
-            <span class="stat__suffix">%</span>
-            <span class="stat__label">Sur mesure</span>
-          </div>
-          <div class="stat reveal">
-            <span class="stat__number" data-count="24">0</span>
-            <span class="stat__suffix">h</span>
-            <span class="stat__label">Délai de réponse garanti</span>
-          </div>
-          <div class="stat reveal">
-            <span class="stat__number" data-count="10">0</span>
-            <span class="stat__suffix">ans</span>
-            <span class="stat__label">Garantie décennale</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Prestations -->
-  <section class="services" id="prestations">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="label">Ce que nous faisons</span>
-        <h2>Nos prestations</h2>
-        <p class="section-header__sub">De la première ébauche à la livraison finale, nous vous accompagnons à chaque étape.</p>
-      </div>
-      <div class="services__grid">
-        <div class="service-card reveal">
-          <div class="service-card__number">01</div>
-          <div class="service-card__icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="6" y="6" width="36" height="36" rx="2"/>
-              <path d="M6 16h36M16 6v40M26 16v26"/>
-              <circle cx="11" cy="11" r="1.5" fill="currentColor"/>
-              <circle cx="21" cy="11" r="1.5" fill="currentColor"/>
-            </svg>
-          </div>
-          <h3>Conception 3D</h3>
-          <p>Du premier croquis au plan 3D photo-réaliste, nous co-créons votre cuisine idéale en tenant compte de chaque contrainte et de vos envies.</p>
-        </div>
-        <div class="service-card reveal">
-          <div class="service-card__number">02</div>
-          <div class="service-card__icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10 38V20l14-10 14 10v18"/>
-              <rect x="18" y="26" width="12" height="12"/>
-              <path d="M22 26v12M26 32h-8"/>
-            </svg>
-          </div>
-          <h3>Fabrication & Pose</h3>
-          <p>Nos artisans expérimentés assurent une fabrication de qualité et une pose soignée, dans le respect des délais convenus et avec la précision du millimètre.</p>
-        </div>
-        <div class="service-card reveal">
-          <div class="service-card__number">03</div>
-          <div class="service-card__icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="24" cy="24" r="16"/>
-              <path d="M24 14v10l7 4"/>
-              <path d="M8 24c0-8.8 7.2-16 16-16"/>
-            </svg>
-          </div>
-          <h3>Suivi & Garanties</h3>
-          <p>Un interlocuteur unique tout au long du projet — de la visite technique jusqu'à la livraison finale, avec garantie décennale et SAV réactif.</p>
-        </div>
-        <div class="service-card reveal">
-          <div class="service-card__number">04</div>
-          <div class="service-card__icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="8" y="14" width="32" height="24" rx="2"/>
-              <path d="M8 20h32M16 8v6M32 8v6M16 28h4M24 28h8M16 34h4"/>
-            </svg>
-          </div>
-          <h3>Espace client dédié</h3>
-          <p>Accédez à votre espace personnel pour suivre l'avancement de votre projet, consulter vos documents et échanger directement avec votre cuisiniste.</p>
-        </div>
-      </div>
-      <div class="services__cta reveal">
-        <a href="#contact" class="btn btn--primary">Démarrer mon projet</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Réalisations -->
-  <section class="realisations" id="realisations">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="label">Notre travail</span>
-        <h2>Nos réalisations</h2>
-        <p class="section-header__sub">Chaque projet raconte une histoire différente. Voici quelques-unes de nos créations.</p>
-      </div>
-      <div class="gallery__filters reveal">
-        <button class="gallery__filter active" data-filter="all">Tous</button>
-        <button class="gallery__filter" data-filter="contemporain">Contemporain</button>
-        <button class="gallery__filter" data-filter="industriel">Industriel</button>
-        <button class="gallery__filter" data-filter="scandinave">Scandinave</button>
-        <button class="gallery__filter" data-filter="classique">Classique</button>
-      </div>
-    </div>
-    <div class="gallery">
-      <div class="gallery__item gallery__item--large reveal" data-style="contemporain">
-        <div class="gallery__inner">
-          <div class="gallery__placeholder gallery__placeholder--1"></div>
-          <div class="gallery__caption">
-            <span class="gallery__tag">Contemporain</span>
-            <h4>Cuisine ouverte — Paris 16e</h4>
-          </div>
-        </div>
-      </div>
-      <div class="gallery__item reveal" data-style="industriel">
-        <div class="gallery__inner">
-          <div class="gallery__placeholder gallery__placeholder--2"></div>
-          <div class="gallery__caption">
-            <span class="gallery__tag">Industriel</span>
-            <h4>Loft — Lyon</h4>
-          </div>
-        </div>
-      </div>
-      <div class="gallery__item reveal" data-style="scandinave">
-        <div class="gallery__inner">
-          <div class="gallery__placeholder gallery__placeholder--3"></div>
-          <div class="gallery__caption">
-            <span class="gallery__tag">Scandinave</span>
-            <h4>Maison — Bordeaux</h4>
-          </div>
-        </div>
-      </div>
-      <div class="gallery__item gallery__item--wide reveal" data-style="classique">
-        <div class="gallery__inner">
-          <div class="gallery__placeholder gallery__placeholder--4"></div>
-          <div class="gallery__caption">
-            <span class="gallery__tag">Classique</span>
-            <h4>Villa — Marseille</h4>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+    </section>
+  </div>
+  <section class="intro" id="intro" aria-label="L’accompagnement Limetta"><div class="container promise-strip"><p>À vos côtés, sans pépins.</p><span>Conception chez vous</span><span>Meubles de fabrication française</span><span>Votre cuisine en réalité virtuelle</span></div></section>
   <!-- À propos -->
   <section class="about" id="a-propos">
     <div class="container">
       <div class="about__grid">
-        <div class="about__visual reveal">
+        <div class="about__visual">
           <div class="about__img-wrap">
-            <img src="/Portrait%20JBa.jpg" alt="Jordan Bayonas — Cuisiniste artisan Cuisines Limetta" class="about__img">
+            <img src="/jordan-bayonas-flyer.webp" alt="Jordan Bayonas, votre cuisiniste indépendant — portrait du flyer Cuisines Limetta" class="about__img" width="627" height="627" loading="lazy" data-content-src="about.photo">
             <div class="about__img-badge">
-              <span class="badge__number" data-content="about.badge_ville">Lyon</span>
-              <span class="badge__text" data-content="about.badge_sub">& 50 km autour</span>
+              <span class="badge__number" data-content="about.badge_ville">Jordan BAYONAS</span>
+              <span class="badge__text" data-content="about.badge_sub">Votre cuisiniste</span>
             </div>
           </div>
         </div>
-        <div class="about__content reveal">
-          <span class="label">Qui sommes-nous</span>
-          <h2>Un artisan passionné par son métier</h2>
-          <p data-content="about.p1">Cuisiniste artisan basé à Varambon (Ain), j'interviens à Lyon, Bourg-en-Bresse, Ambérieu-en-Bugey et dans tout un rayon de 50 km. Passionné par la menuiserie et le design d'intérieur, je traite chaque projet avec la même rigueur : de la première ébauche jusqu'à la livraison.</p>
-          <p data-content="about.p2">Mon engagement : une écoute sans filtre, des matériaux choisis avec exigence, et une transparence totale à chaque étape — pour que votre cuisine soit exactement celle que vous aviez imaginée.</p>
+        <div class="about__content">
+          <span class="label">Jordan Bayonas · Cuisiniste indépendant</span>
+          <h2>Votre cuisine commence par une rencontre.</h2>
+          <p data-content="about.p1">Je suis Jordan Bayonas, cuisiniste indépendant et fondateur de Cuisines Limetta, à Varambon dans l’Ain. Je conçois votre cuisine avec vous, chez vous, à partir de vos habitudes, de vos envies et des contraintes de votre pièce.</p>
+          <p data-content="about.p2">Avec la réalité virtuelle, vous entrez dans votre future cuisine : déplacez-vous librement, ouvrez les portes et les tiroirs et découvrez votre aménagement avant de choisir. Je vous accompagne dans cette expérience, chez vous.</p>
           <ul class="about__values">
-            <li>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 10l4 4 8-8"/>
-              </svg>
-              Matériaux premium sélectionnés avec soin
-            </li>
-            <li>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 10l4 4 8-8"/>
-              </svg>
-              Devis détaillé et prix transparent, sans surprises
-            </li>
-            <li>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 10l4 4 8-8"/>
-              </svg>
-              Garantie décennale et SAV réactif après livraison
-            </li>
-            <li>
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 10l4 4 8-8"/>
-              </svg>
-              Intervention à Lyon et dans un rayon de 50 km
-            </li>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10l4 4 8-8"/></svg><span data-content="about.valeurs.0">Une écoute attentive, avant de dessiner</span></li>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10l4 4 8-8"/></svg><span data-content="about.valeurs.1">Des choix de matériaux expliqués, échantillons en main</span></li>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10l4 4 8-8"/></svg><span data-content="about.valeurs.2">Un devis accompagné du détail des éléments choisis</span></li>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10l4 4 8-8"/></svg><span data-content="about.valeurs.3">Un suivi personnel, de la conception au service après-vente</span></li>
           </ul>
           <div class="about__actions">
             <a href="#contact" class="btn btn--primary">Démarrer mon projet</a>
-            <a href="/connexion.html" class="link-arrow">Accéder à mon espace <span>→</span></a>
+            <a href="tel:+33767012102" class="link-arrow">Appeler Jordan <span><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="faq" id="faq">
+  <section class="vr-experience" id="experience-vr"><div class="container">
+    <div class="vr-intro"><span class="label">La réalité virtuelle, chez vous</span><h2>Entrez dans votre cuisine.<br>Avant qu’elle existe.</h2><p>Le casque sur les yeux, votre projet prend une autre dimension. Vous vous déplacez dans votre future cuisine et découvrez ce qu’un plan seul ne peut pas vous faire ressentir.</p></div>
+    <div class="vr-layout"><div class="vr-scene motion-image"><img src="/experience-vr-flyer.webp" alt="Une personne explore une cuisine avec un casque de réalité virtuelle, accompagnée par Jordan — visuel du flyer Limetta" width="1589" height="1391" loading="lazy"><div class="vr-scene__caption"><span>Votre projet. À votre échelle.</span><small>L’expérience Limetta, à votre domicile</small></div></div>
+    <div class="vr-features">
+      <article><span class="vr-feature__icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-4-4 4 4-4 4M8 8l-4 4 4 4"/></svg></span><h3>Déplacez-vous librement.</h3><p>Explorez les volumes et découvrez votre implantation depuis les points de vue qui comptent pour vous.</p></article>
+      <article><span class="vr-feature__icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 4h14v16H5zM12 4v16M9 11v2m6-2v2"/></svg></span><h3>Ouvrez. Explorez. Projetez-vous.</h3><p>Ouvrez les portes et les tiroirs. Découvrez comment les rangements s’intègrent à votre futur quotidien.</p></article>
+      <article><span class="vr-feature__icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 12 4 4L19 6"/></svg></span><h3>Choisissez en confiance.</h3><p>Nous échangeons sur vos sensations et affinons ensemble le projet. Je vous accompagne tout au long de l’expérience, à votre domicile.</p></article>
+      <a href="#contact" class="btn btn--primary">Découvrir ma future cuisine</a>
+    </div></div>
+  </div></section>
+  <section class="projection" id="projection"><div class="container projection__grid">
+    <div class="projection__copy"><h2>Une même pièce,<br>des possibilités infinies.</h2><p>La même implantation change de caractère avec les couleurs et les matières. Sélectionnez une ambiance et découvrez les possibilités pour votre cuisine.</p>
+    <div class="ambiance-choices" role="group" aria-label="Choisir une ambiance">
+      <button type="button" class="ambiance-choice is-selected" data-ambiance="bleu" aria-pressed="true"><span class="ambiance-swatch" style="--swatch:#293e50"></span>Bleu profond</button>
+      <button type="button" class="ambiance-choice" data-ambiance="noyer" aria-pressed="false"><span class="ambiance-swatch" style="--swatch:#765035"></span>Noyer</button>
+      <button type="button" class="ambiance-choice" data-ambiance="blanc" aria-pressed="false"><span class="ambiance-swatch" style="--swatch:#efede6"></span>Blanc &amp; bois</button>
+      <button type="button" class="ambiance-choice" data-ambiance="terracotta" aria-pressed="false"><span class="ambiance-swatch" style="--swatch:#b56d4c"></span>Terracotta</button>
+    </div><p id="ambiance-description" aria-live="polite" aria-atomic="true">Façades bleu profond, plan clair et touches de bois.</p><a href="#contact" class="link-arrow">Imaginons votre cuisine ensemble</a></div>
+    <figure class="ambiance-preview"><div class="ambiance-image-wrap" id="ambiance-image-wrap"><img id="ambiance-image" src="/cuisine-bleue-apres.webp" alt="Cuisine aux façades bleu profond avec un plan de travail clair" width="1254" height="1254" loading="lazy"></div><figcaption>Illustrations d’ambiances. Les références et finitions sont choisies ensemble selon les gammes disponibles.</figcaption></figure>
+  </div></section>
+  <!-- Inspirations : illustrations issues du flyer, sans attribution à des chantiers clients -->
+  <section class="realisations" id="inspirations">
+    <span id="realisations" class="anchor-alias" aria-hidden="true"></span>
     <div class="container">
-      <div class="section-header reveal">
-        <span class="label">Questions fréquentes</span>
-        <h2>Tout ce que vous souhaitez savoir</h2>
-        <p class="section-header__sub">Retrouvez les réponses aux questions les plus courantes sur nos prestations, nos délais et notre façon de travailler.</p>
+      <div class="section-header">
+        <span class="label">Nos cuisines</span>
+        <h2>Des cuisines à votre image.</h2>
+        <p class="section-header__sub">Des matières chaleureuses, un bleu profond, des lignes épurées… Ces inspirations sont un point de départ. Votre cuisine se dessinera autour de vous.</p>
       </div>
-      <div class="faq__list">
-
-        <div class="faq__group reveal">
-          <h3 class="faq__group-title">Le parcours client</h3>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Comment se déroule un projet de cuisine sur mesure avec vous ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>Un interlocuteur unique s'occupe de tout le projet, qui se déroule en 5 étapes :</p>
-              <ol>
-                <li>Visite chez vous pour les mesures et vos envies</li>
-                <li>Conception avec plans et visuels 3D</li>
-                <li>Devis détaillé poste par poste</li>
-                <li>Fabrication</li>
-                <li>Pose</li>
-              </ol>
-              <p>Vous êtes accompagné du premier rendez-vous jusqu'à la réception, sans pépins !</p>
-            </div></div>
-          </div>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Dois-je déjà savoir ce que je veux avant de vous contacter ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>Non. Certains clients arrivent avec un dossier complet, d'autres avec juste l'envie de changer. C'est notre métier de vous guider. Le premier rendez-vous sert justement à ça — sans engagement.</p>
-            </div></div>
-          </div>
-        </div>
-
-        <div class="faq__group reveal">
-          <h3 class="faq__group-title">Personnalisation</h3>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Qu'est-ce qui est réellement personnalisable ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>Tout : dimensions, façades, plans de travail, poignées, agencement des rangements. On adapte la cuisine à votre espace — pas l'inverse. Mur en biais, plafond bas, contraintes techniques : c'est là que le sur-mesure prend tout son sens.</p>
-            </div></div>
-          </div>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Puis-je intégrer l'électroménager de mon choix ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>Oui. Que vous ayez déjà un équipement ou une marque en tête, on conçoit autour. Nous pouvons aussi vous conseiller des références partenaires adaptées à votre configuration et à vos besoins.</p>
-            </div></div>
-          </div>
-        </div>
-
-        <div class="faq__group reveal">
-          <h3 class="faq__group-title">Matériaux et qualité</h3>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Quels matériaux proposez-vous ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>Stratifié haute pression, quartz, granit, bois massif, céramique, Dekton… Chaque matériau a ses atouts. On vous les présente échantillons en main lors de la conception, pour que vous puissiez voir le rendu directement chez vous, avec votre lumière.</p>
-            </div></div>
-          </div>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Avec quelles marques travaillez-vous ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>Nous collaborons avec des ateliers de fabrication italiens, reconnus pour leur qualité et leur durabilité. Ce choix nous permet de garantir un niveau de finition premium et une flexibilité dans les styles pour s'accorder à vos envies.</p>
-            </div></div>
-          </div>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Quelle garantie ai-je sur ma cuisine ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>Un seul interlocuteur, même après la livraison. Chaque composant est couvert par la garantie fabricant 10 ans. L'électroménager est garanti 2 ans. Pour la pose, vous êtes couverts par la garantie décennale pendant 10 ans — et on intervient si un ajustement est nécessaire.</p>
-            </div></div>
-          </div>
-        </div>
-
-        <div class="faq__group reveal">
-          <h3 class="faq__group-title">Tarifs et devis</h3>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Quel budget faut-il prévoir ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>Chaque projet est unique : le prix dépend de la taille de votre cuisine, des matériaux choisis et de la complexité de l'installation. Plutôt que de donner un chiffre qui ne refléterait pas votre situation, nous préférons en discuter ensemble. Le premier rendez-vous et la conception sont gratuits — c'est le moyen le plus fiable d'obtenir une estimation réaliste, sans engagement.</p>
-            </div></div>
-          </div>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Le premier rendez-vous et le devis sont-ils gratuits ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>Oui, les deux. Et sans engagement — vous avez le temps de comparer et de réfléchir.</p>
-            </div></div>
-          </div>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Quelles sont les conditions de paiement ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>Un acompte à la commande, le solde à la fin de la pose. Tout est détaillé dans le devis.</p>
-            </div></div>
-          </div>
-        </div>
-
-        <div class="faq__group reveal">
-          <h3 class="faq__group-title">Délais et logistique</h3>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Quel est le délai entre la validation et la pose ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>En moyenne 3 à 5 semaines, fabrication incluse. Votre espace personnel vous permet de suivre l'avancement à chaque étape, facilement.</p>
-            </div></div>
-          </div>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Qui réalise la pose et combien de temps dure-t-elle ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>La même personne qui vous suit depuis le début — votre unique interlocuteur. Comptez 2 à 5 jours selon la taille du projet. On gère tout : montage, raccordements, ajustements, mise en route de l'électroménager avec vous.</p>
-            </div></div>
-          </div>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Que se passe-t-il en cas d'imprévu ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>La visite technique en amont permet d'anticiper la plupart des surprises. Si un imprévu survient malgré tout, on vous informe immédiatement et on trouve la solution ensemble — sans surcoût caché.</p>
-            </div></div>
-          </div>
-        </div>
-
-        <div class="faq__group reveal">
-          <h3 class="faq__group-title">Zone et infos pratiques</h3>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Intervenez-vous dans ma ville ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>On intervient sur le bassin lyonnais et dans un rayon de 50 km. En dehors de cette zone, n'hésitez quand même pas à nous contacter — nous étudions les possibilités au cas par cas.</p>
-            </div></div>
-          </div>
-          <div class="faq__item">
-            <button class="faq__question" aria-expanded="false">Comment prendre rendez-vous ?<span class="faq__chevron"></span></button>
-            <div class="faq__answer" aria-hidden="true"><div class="faq__answer-inner">
-              <p>Appelez-nous au <a href="tel:+33767012102">07 67 01 21 02</a> ou remplissez le formulaire ci-dessous. On vous recontacte sous 24h.</p>
-            </div></div>
-          </div>
-        </div>
-
+      <div class="inspiration-grid">
+        <figure class="inspiration-card">
+          <img src="/inspiration-cuisine-naturelle.webp" alt="Ambiance de cuisine aux tons naturels, avec un îlot et des matières chaleureuses" width="1254" height="1254" loading="lazy">
+          <figcaption><span class="label">Douceur & matières naturelles</span><h3>Un lieu où l’on se retrouve.</h3><p>Un îlot central, des tons naturels et de grandes surfaces pour préparer et partager.</p></figcaption>
+        </figure>
+        <figure class="inspiration-card">
+          <img src="/inspiration-cuisine-bleue.webp" alt="Ambiance de cuisine bleu profond et bois, aux lignes contemporaines" width="1012" height="1800" loading="lazy">
+          <figcaption><span class="label">Bleu profond & bois</span><h3>Du caractère au quotidien.</h3><p>Une implantation en angle, des façades bleu profond et une crédence bois pour une cuisine affirmée.</p></figcaption>
+        </figure>
       </div>
+      <p class="inspiration-note">Visuels d’inspiration issus de notre flyer ; ils ne présentent pas des chantiers réalisés par Cuisines Limetta.</p>
     </div>
   </section>
+
+  <section class="french-quality" id="fabrication"><div class="container">
+    <div class="quality-heading"><span class="label">Le choix de la fabrication française</span><h2>Bien pensée chez vous.<br>Fabriquée en France.</h2><p>Je sélectionne les meubles auprès d’un fournisseur français pour associer qualité, choix et réactivité à votre projet.</p></div>
+    <div class="quality-grid">
+      <article><span class="quality-mark" aria-hidden="true">FR</span><h3>Un savoir-faire français.</h3><p>Vos meubles de cuisine sont fabriqués en France. Un choix au cœur de l’offre Limetta.</p></article>
+      <article><span class="quality-mark" aria-hidden="true">NF</span><h3>Une qualité documentée.</h3><p>Notre fournisseur propose des meubles de cuisine certifiés NF. Nous précisons les caractéristiques et les garanties des références retenues pour votre projet.</p><small>Certification applicable aux produits concernés.</small></article>
+      <article><span class="quality-mark quality-mark--time">2 semaines</span><h3>Un fournisseur réactif.</h3><p>Délai fournisseur annoncé à compter de la prise de commande, à confirmer selon votre projet.</p><small>Le calendrier de livraison et de pose est défini séparément.</small></article>
+    </div><p class="quality-rse">Notre fournisseur s’engage aussi dans une démarche RSE : mieux utiliser les ressources et réduire les déchets et les emballages.</p>
+  </div></section>
+  <section class="services" id="prestations"><div class="container">
+    <div class="section-header"><h2>Un projet clair.<br>À chaque étape.</h2><p class="section-header__sub">De notre première rencontre au suivi de votre cuisine, vous savez avec qui avancer.</p></div>
+    <ol class="project-steps">
+      <li><span class="project-step__number">01</span><div><h3>Nous nous rencontrons chez vous.</h3><p>Vos habitudes, vos envies, votre budget et votre pièce : je prends le temps de comprendre ce qui compte pour vous.</p></div></li>
+      <li><span class="project-step__number">02</span><div><h3>Nous donnons forme à vos idées.</h3><p>Implantation, vues 3D, échantillons et choix des équipements. Nous affinons ensemble le projet, avec un devis et le détail des éléments retenus.</p></div></li>
+      <li><span class="project-step__number">03</span><div><h3>Je vous accompagne jusqu’à la réalisation.</h3><p>Commande, organisation de la livraison et suivi : je reste votre contact. La pose est réalisée et facturée directement par un partenaire.</p></div></li>
+    </ol>
+    <p class="services__note">La conception peut commencer pendant notre rendez-vous ou être préparée puis présentée lors d’une seconde rencontre, selon vos disponibilités.</p>
+  </div></section>
+  <!-- Questions fréquentes -->
+  <section class="faq" id="faq"><div class="container">
+    <div class="section-header"><span class="label">Vos questions</span><h2>Avançons <em>en confiance.</em></h2><p class="section-header__sub">Le rendez-vous, vos choix, le budget et le rôle de chacun : les réponses pour préparer votre projet.</p></div>
+    <div class="faq__list">
+        <div class="faq__group"><h3 class="faq__group-title">Le projet, ensemble</h3>
+          <div class="faq__item">
+            <button class="faq__question" id="question-1" aria-expanded="false" aria-controls="reponse-1">Comment se déroule le premier rendez-vous ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-1" aria-hidden="true" aria-labelledby="question-1"><div class="faq__answer-inner"><p>Nous nous rencontrons chez vous pour parler de votre façon de vivre, de ce qui vous manque dans votre cuisine actuelle et de vos envies. Nous observons la pièce et définissons vos priorités avant de travailler l’aménagement.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="question-2" aria-expanded="false" aria-controls="reponse-2">Faut-il déjà avoir un plan ou des idées précises ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-2" aria-hidden="true" aria-labelledby="question-2"><div class="faq__answer-inner"><p>Quelques photos, un plan si vous en avez un, ou simplement l’envie de changer : nous partons de là où vous en êtes. La découverte sert justement à préciser ensemble ce qui vous correspond.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="question-3" aria-expanded="false" aria-controls="reponse-3">Comment vais-je me projeter dans ma future cuisine ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-3" aria-hidden="true" aria-labelledby="question-3"><div class="faq__answer-inner"><p>Les plans et les vues 3D vous aident à comprendre l’implantation. L’expérience immersive permet d’explorer les volumes et les circulations. Nous confrontons ces choix aux échantillons de façades et de matériaux, dans votre intérieur.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="question-4" aria-expanded="false" aria-controls="reponse-4">Tout se fait-il lors du même rendez-vous ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-4" aria-hidden="true" aria-labelledby="question-4"><div class="faq__answer-inner"><p>Si vous disposez du temps nécessaire, nous pouvons avancer ensemble sur la conception pendant la même visite. Sinon, je prépare le projet et nous convenons d’un second rendez-vous pour le découvrir et l’affiner.</p></div></div>
+          </div>
+        </div>
+        <div class="faq__group"><h3 class="faq__group-title">Vos choix &amp; votre budget</h3>
+          <div class="faq__item">
+            <button class="faq__question" id="question-5" aria-expanded="false" aria-controls="reponse-5">Que puis-je personnaliser ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-5" aria-hidden="true" aria-labelledby="question-5"><div class="faq__answer-inner"><p>L’implantation, les façades, les finitions, les poignées, les rangements, le plan de travail et les équipements se choisissent ensemble. Les dimensions et adaptations dépendent des possibilités des gammes retenues et des contraintes techniques de votre pièce.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="question-6" aria-expanded="false" aria-controls="reponse-6">D’où viennent les meubles ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-6" aria-hidden="true" aria-labelledby="question-6"><div class="faq__answer-inner"><p>Je sélectionne les meubles de cuisine auprès d’un fournisseur français. Nous examinons les références, les finitions et les caractéristiques des produits retenus. Les équipements et l’électroménager font l’objet de choix distincts selon votre projet.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="question-7" aria-expanded="false" aria-controls="reponse-7">Puis-je conserver mon électroménager ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-7" aria-hidden="true" aria-labelledby="question-7"><div class="faq__answer-inner"><p>Oui, lorsque ses dimensions, son état et les contraintes de pose le permettent. Nous identifions les appareils à conserver et ceux à remplacer pour les intégrer à la conception et au chiffrage.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="question-8" aria-expanded="false" aria-controls="reponse-8">L’étude 3D et le devis sont-ils gratuits ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-8" aria-hidden="true" aria-labelledby="question-8"><div class="faq__answer-inner"><p>Oui. L’étude 3D et le devis sont gratuits et sans engagement. Nous prenons le temps de préciser vos choix et le périmètre du projet.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="question-9" aria-expanded="false" aria-controls="reponse-9">Comment connaître le prix de ma cuisine ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-9" aria-hidden="true" aria-labelledby="question-9"><div class="faq__answer-inner"><p>Le montant dépend de l’implantation, des meubles, des façades, du plan de travail et des équipements choisis. Une première estimation peut orienter nos échanges ; le devis et son listing détaillé précisent ensuite les éléments retenus. La pose est chiffrée et facturée séparément par le partenaire.</p></div></div>
+          </div>
+        </div>
+        <div class="faq__group"><h3 class="faq__group-title">La réalisation &amp; le suivi</h3>
+          <div class="faq__item">
+            <button class="faq__question" id="question-10" aria-expanded="false" aria-controls="reponse-10">Qui réalise la pose ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-10" aria-hidden="true" aria-labelledby="question-10"><div class="faq__answer-inner"><p>La pose est réalisée par un partenaire, qui établit son propre devis et sa facture. Je reste votre interlocuteur pour la conception, la commande, l’organisation de la livraison et la coordination du projet.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="question-11" aria-expanded="false" aria-controls="reponse-11">Quels délais faut-il prévoir ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-11" aria-hidden="true" aria-labelledby="question-11"><div class="faq__answer-inner"><p>Le calendrier dépend des références commandées, de leur disponibilité et de l’organisation du chantier avec le poseur. Nous précisons ensemble les étapes et les délais applicables à votre projet avant de nous engager.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="question-12" aria-expanded="false" aria-controls="reponse-12">Qui contacter après l’installation ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-12" aria-hidden="true" aria-labelledby="question-12"><div class="faq__answer-inner"><p>Vous pouvez me contacter directement pour le suivi et le service après-vente. Je fais le lien avec le fournisseur ou le partenaire concerné. Les garanties et leurs conditions sont précisées pour les produits et les prestations retenus.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" id="question-13" aria-expanded="false" aria-controls="reponse-13">Intervenez-vous dans ma commune ?<span class="faq__chevron" aria-hidden="true"></span></button>
+            <div class="faq__answer" id="reponse-13" aria-hidden="true" aria-labelledby="question-13"><div class="faq__answer-inner"><p>Cuisines Limetta est basé à Varambon, dans l’Ain. Indiquez-moi votre commune et votre projet : nous confirmerons ensemble la possibilité d’un rendez-vous à domicile.</p></div></div>
+          </div>
+        </div>
+    </div>
+  </div></section>
 
   <!-- Contact / Devis -->
   <section class="contact" id="contact">
     <div class="container">
       <div class="contact__grid">
-        <div class="contact__info reveal">
+        <div class="contact__info">
           <span class="label">Parlons de votre projet</span>
-          <h2 data-content="contact.titre">Demandez votre devis gratuit</h2>
-          <p data-content="contact.sub">Décrivez-nous votre projet et nous revenons vers vous sous 24h pour organiser une première rencontre, sans engagement.</p>
+          <h2 data-content="contact.titre">Votre projet commence ici.</h2>
+          <p data-content="contact.sub">Parlez-moi de votre pièce, de vos envies et de votre commune. Je vous recontacte personnellement pour organiser un premier rendez-vous chez vous.</p>
           <div class="contact__details">
             <a class="contact__detail" href="tel:+33767012102" data-content-href="site.telephoneHref">
               <div class="contact__detail-icon">
@@ -576,17 +316,14 @@
                 </svg>
               </div>
               <div>
-                <strong>Adresse</strong>
-                <span data-content="site.adresse">410 rue des Rives de l'Ain, 01160 Varambon</span>
+                <strong>Rendez-vous à domicile</strong>
+                <span>Basé à Varambon, je viens à votre rencontre. Pas d’accueil du public sur place.</span>
               </div>
             </div>
           </div>
-          <div class="contact__client-access">
-            <p>Déjà client ? Accédez à votre espace de suivi de projet.</p>
-            <a href="/connexion.html" class="btn btn--outline">Connexion espace client</a>
-          </div>
+          <div class="contact__reassurance" id="contact-start"><strong>Étude 3D et devis gratuits, sans engagement.</strong><p>Un premier échange pour comprendre votre projet et trouver un créneau ensemble.</p></div>
         </div>
-        <form class="contact__form reveal" id="contact-form" novalidate>
+        <form class="contact__form" id="contact-form" novalidate>
           <div class="form-row">
             <div class="form-group">
               <label for="prenom">Prénom *</label>
@@ -618,58 +355,43 @@
           </div>
           <div class="form-group">
             <label for="message">Votre projet *</label>
-            <textarea id="message" name="message" rows="4" placeholder="Décrivez brièvement votre projet (superficie, style souhaité, budget estimé...)" required></textarea>
+            <textarea id="message" name="message" rows="4" placeholder="Votre commune, ce que vous souhaitez améliorer, vos envies et votre échéance si vous en avez une…" required></textarea>
           </div>
           <button type="submit" class="btn btn--primary btn--full">
-            <span class="btn-text">Envoyer ma demande</span>
+            <span class="btn-text">Demander un rendez-vous</span>
             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </button>
-          <p class="form-legal">En soumettant ce formulaire, vous acceptez d'être recontacté concernant votre projet. Aucune donnée ne sera transmise à des tiers.</p>
+          <p class="form-legal">Les informations de ce formulaire servent à répondre à votre demande et à organiser notre échange. Pour toute question sur vos données, contactez <a href="mailto:j.bayonas@cuisines-limetta.com">Jordan par email</a>.</p>
         </form>
       </div>
     </div>
   </section>
 
+  </main>
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer__grid">
         <div class="footer__brand">
           <img src="/logo%20minimaliste%20vectoris%C3%A9.svg" alt="Cuisines Limetta" class="footer__logo">
-          <p>Cuisiniste artisan à Varambon, près de Lyon.<br>À vos côtés, sans pépins.</p>
-          <div class="footer__socials">
-            <a href="#" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <rect x="2" y="2" width="20" height="20" rx="5"/>
-                <circle cx="12" cy="12" r="4"/>
-                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="#" aria-label="Pinterest">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.24-5.24 1.24-5.24s-.32-.63-.32-1.56c0-1.47.85-2.57 1.91-2.57.9 0 1.34.68 1.34 1.49 0 .91-.58 2.27-.88 3.53-.25 1.06.53 1.92 1.57 1.92 1.88 0 3.14-2.4 3.14-5.24 0-2.17-1.47-3.69-3.56-3.69-2.42 0-3.84 1.82-3.84 3.7 0 .73.28 1.52.63 1.95.07.08.08.16.06.24l-.24.97c-.04.15-.12.19-.28.11-1.05-.49-1.71-2.02-1.71-3.26 0-2.65 1.93-5.08 5.56-5.08 2.92 0 5.19 2.08 5.19 4.86 0 2.9-1.83 5.23-4.37 5.23-.85 0-1.66-.44-1.93-.97l-.53 1.96c-.19.73-.7 1.64-1.05 2.2.79.24 1.63.37 2.5.37 5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
-              </svg>
-            </a>
-          </div>
+          <p>Votre cuisiniste indépendant à domicile.<br>Basé à Varambon, dans l’Ain.<br>À vos côtés, sans pépins.</p>
+
         </div>
         <div class="footer__col">
           <h4>Navigation</h4>
           <ul>
-            <li><a href="#prestations">Prestations</a></li>
-            <li><a href="#realisations">Réalisations</a></li>
+            <li><a href="#experience-vr">L’expérience VR</a></li><li><a href="#prestations">Votre projet</a></li>
+            <li><a href="#inspirations">Nos cuisines</a></li>
             <li><a href="#a-propos">À propos</a></li>
             <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Contact & Devis</a></li>
+            <li><a href="#contact">Votre projet</a></li>
           </ul>
         </div>
         <div class="footer__col">
-          <h4>Espace client</h4>
-          <ul>
-            <li><a href="/connexion.html">Connexion</a></li>
-            <li><a href="/tableau-de-bord.html">Mon tableau de bord</a></li>
-          </ul>
+          <h4>Rencontrons-nous</h4>
+          <ul><li><a href="#contact">Prendre rendez-vous</a></li><li><a href="tel:+33767012102">07 67 01 21 02</a></li><li><a href="mailto:j.bayonas@cuisines-limetta.com">Écrire à Jordan</a></li></ul>
         </div>
         <div class="footer__col">
           <h4>Légal</h4>
@@ -681,29 +403,123 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <p>© 2026 Cuisines Limetta — Jordan Bayonas. Tous droits réservés. <span style="opacity:0.4;font-size:0.85em;">v1.2.1</span></p>
-        <p>Lyon & région — <a href="mailto:j.bayonas@cuisines-limetta.com" style="color:inherit;opacity:.6">j.bayonas@cuisines-limetta.com</a></p>
+        <p>© 2026 Cuisines Limetta — Jordan Bayonas. Tous droits réservés. <span style="opacity:0.4;font-size:0.85em;">v1.3.0</span></p>
+        <p>Varambon · Ain — <a href="mailto:j.bayonas@cuisines-limetta.com" style="color:inherit;opacity:.6">j.bayonas@cuisines-limetta.com</a></p>
       </div>
     </div>
   </footer>
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {"@type":"Question","name":"Comment se déroule un projet de cuisine sur mesure avec vous ?","acceptedAnswer":{"@type":"Answer","text":"Un interlocuteur unique s'occupe de tout le projet en 5 étapes : visite chez vous, conception 3D, devis détaillé, fabrication et pose. Vous êtes accompagné du premier rendez-vous jusqu'à la réception."}},
-      {"@type":"Question","name":"Dois-je déjà savoir ce que je veux avant de vous contacter ?","acceptedAnswer":{"@type":"Answer","text":"Non. Certains clients arrivent avec un dossier complet, d'autres avec juste l'envie de changer. C'est notre métier de vous guider. Le premier rendez-vous sert justement à ça, sans engagement."}},
-      {"@type":"Question","name":"Qu'est-ce qui est réellement personnalisable ?","acceptedAnswer":{"@type":"Answer","text":"Tout : dimensions, façades, plans de travail, poignées, agencement des rangements. On adapte la cuisine à votre espace — pas l'inverse."}},
-      {"@type":"Question","name":"Puis-je intégrer l'électroménager de mon choix ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Que vous ayez déjà un équipement ou une marque en tête, on conçoit autour. Nous pouvons aussi vous conseiller des références partenaires."}},
-      {"@type":"Question","name":"Quels matériaux proposez-vous ?","acceptedAnswer":{"@type":"Answer","text":"Stratifié haute pression, quartz, granit, bois massif, céramique, Dekton… On vous les présente échantillons en main lors de la conception."}},
-      {"@type":"Question","name":"Quelle garantie ai-je sur ma cuisine ?","acceptedAnswer":{"@type":"Answer","text":"Garantie fabricant 10 ans sur les composants, 2 ans sur l'électroménager, et garantie décennale sur la pose pendant 10 ans."}},
-      {"@type":"Question","name":"Quel budget faut-il prévoir ?","acceptedAnswer":{"@type":"Answer","text":"Chaque projet est unique. Le premier rendez-vous et la conception sont gratuits — c'est le moyen le plus fiable d'obtenir une estimation réaliste, sans engagement."}},
-      {"@type":"Question","name":"Le premier rendez-vous et le devis sont-ils gratuits ?","acceptedAnswer":{"@type":"Answer","text":"Oui, les deux. Et sans engagement — vous avez le temps de comparer et de réfléchir."}},
-      {"@type":"Question","name":"Quel est le délai entre la validation et la pose ?","acceptedAnswer":{"@type":"Answer","text":"En moyenne 3 à 5 semaines, fabrication incluse."}},
-      {"@type":"Question","name":"Intervenez-vous dans ma ville ?","acceptedAnswer":{"@type":"Answer","text":"On intervient sur le bassin lyonnais et dans un rayon de 50 km. En dehors de cette zone, contactez-nous — nous étudions les possibilités au cas par cas."}}
-    ]
-  }
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Comment se déroule le premier rendez-vous ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nous nous rencontrons chez vous pour parler de votre façon de vivre, de ce qui vous manque dans votre cuisine actuelle et de vos envies. Nous observons la pièce et définissons vos priorités avant de travailler l’aménagement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Faut-il déjà avoir un plan ou des idées précises ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Quelques photos, un plan si vous en avez un, ou simplement l’envie de changer : nous partons de là où vous en êtes. La découverte sert justement à préciser ensemble ce qui vous correspond."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment vais-je me projeter dans ma future cuisine ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Les plans et les vues 3D vous aident à comprendre l’implantation. L’expérience immersive permet d’explorer les volumes et les circulations. Nous confrontons ces choix aux échantillons de façades et de matériaux, dans votre intérieur."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Tout se fait-il lors du même rendez-vous ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Si vous disposez du temps nécessaire, nous pouvons avancer ensemble sur la conception pendant la même visite. Sinon, je prépare le projet et nous convenons d’un second rendez-vous pour le découvrir et l’affiner."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que puis-je personnaliser ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "L’implantation, les façades, les finitions, les poignées, les rangements, le plan de travail et les équipements se choisissent ensemble. Les dimensions et adaptations dépendent des possibilités des gammes retenues et des contraintes techniques de votre pièce."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "D’où viennent les meubles ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Je sélectionne les meubles de cuisine auprès d’un fournisseur français. Nous examinons les références, les finitions et les caractéristiques des produits retenus. Les équipements et l’électroménager font l’objet de choix distincts selon votre projet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Puis-je conserver mon électroménager ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, lorsque ses dimensions, son état et les contraintes de pose le permettent. Nous identifions les appareils à conserver et ceux à remplacer pour les intégrer à la conception et au chiffrage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "L’étude 3D et le devis sont-ils gratuits ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. L’étude 3D et le devis sont gratuits et sans engagement. Nous prenons le temps de préciser vos choix et le périmètre du projet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment connaître le prix de ma cuisine ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le montant dépend de l’implantation, des meubles, des façades, du plan de travail et des équipements choisis. Une première estimation peut orienter nos échanges ; le devis et son listing détaillé précisent ensuite les éléments retenus. La pose est chiffrée et facturée séparément par le partenaire."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qui réalise la pose ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La pose est réalisée par un partenaire, qui établit son propre devis et sa facture. Je reste votre interlocuteur pour la conception, la commande, l’organisation de la livraison et la coordination du projet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels délais faut-il prévoir ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le calendrier dépend des références commandées, de leur disponibilité et de l’organisation du chantier avec le poseur. Nous précisons ensemble les étapes et les délais applicables à votre projet avant de nous engager."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qui contacter après l’installation ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vous pouvez me contacter directement pour le suivi et le service après-vente. Je fais le lien avec le fournisseur ou le partenaire concerné. Les garanties et leurs conditions sont précisées pour les produits et les prestations retenus."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Intervenez-vous dans ma commune ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cuisines Limetta est basé à Varambon, dans l’Ain. Indiquez-moi votre commune et votre projet : nous confirmerons ensemble la possibilité d’un rendez-vous à domicile."
+      }
+    }
+  ]
+}
   </script>
   <script type="module" src="/src/main.js"></script>
 </body>

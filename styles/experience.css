@@ -1,0 +1,77 @@
+/* The second pass: a stronger brand presence and purposeful motion. */
+:root { --nav-progress:0; }
+.nav,.nav.scrolled { padding:8px 0; }
+.nav__logo img,.nav.scrolled .nav__logo img { height:calc(180px - 112px * var(--nav-progress)); max-width:none; transition:none; }
+.nav__links { gap:24px; }
+.nav .theme-toggle { background:transparent; border-color:#ffffff50; }
+.nav .theme-toggle:hover { background:#ffffff20; }
+.hero { padding-top:calc(196px - 112px * var(--nav-progress)); }
+.promise-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:28px 48px; padding-block:48px; }
+.promise-strip p { grid-column:1/-1; font-size:clamp(2rem,4vw,3.6rem); line-height:1.15; }
+.promise-strip span { font-size:1.13rem; line-height:1.5; max-width:none; padding-left:20px; border-left:3px solid #95c13b; }
+.about__img-badge { min-width:215px; }
+.badge__number { font-size:1.12rem; letter-spacing:.01em; }
+.badge__text { font-size:.85rem; }
+.vr-experience { padding:100px 0; background:var(--fond); overflow:clip; }
+.vr-intro { max-width:850px; margin-bottom:55px; }
+.vr-intro h2 { margin-top:16px; font-size:clamp(2.3rem,4.6vw,4.5rem); }
+.vr-intro>p { max-width:660px; color:var(--gris); margin-top:26px; font-size:1.05rem; }
+.vr-layout { display:grid; grid-template-columns:1.12fr 1fr; gap:75px; align-items:start; }
+.vr-scene { position:sticky; top:130px; aspect-ratio:1; border-radius:8px; overflow:hidden; background:#24336a; }
+.vr-scene img { display:block; height:100%; width:100%; object-fit:cover; transform:translateY(var(--image-shift,0px)) scale(1.09); }
+.vr-scene__caption { position:absolute; bottom:0; left:0; right:0; padding:45px 28px 28px; background:linear-gradient(transparent,rgba(20,32,60,.85)); color:#fff; }
+.vr-scene__caption span { display:block; font-size:1.3rem; font-weight:600; }
+.vr-scene__caption small { display:block; margin-top:5px; font-size:.7rem; }
+.vr-orbit { position:absolute; inset:8%; border:1px solid #ffffff80; border-radius:50%; pointer-events:none; }
+.vr-orbit::before,.vr-orbit::after { content:''; position:absolute; background:#95c13b; width:9px; height:9px; border-radius:50%; left:50%; top:-5px; }
+.vr-orbit::after { top:auto; bottom:-5px; }
+.vr-features article { padding:12px 0 30px; margin-bottom:26px; border-bottom:1px solid var(--gris-clair); }
+.vr-feature__icon { display:grid; place-items:center; width:46px; height:46px; border-radius:50%; color:#24336a; background:#95c13b; font-size:1.7rem; margin-bottom:20px; }
+.vr-features h3 { font-size:1.6rem; margin-bottom:14px; }
+.vr-features p { color:var(--gris); font-size:.96rem; }
+.ambiance-choices { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:28px 0; }
+.ambiance-choice { display:flex; align-items:center; gap:12px; padding:14px 12px; border:1px solid #8290b3; border-radius:7px; background:transparent; color:#fff; font:inherit; text-align:left; cursor:pointer; transition:background .2s,border-color .2s,transform .2s; }
+.ambiance-choice:hover { background:#ffffff12; transform:translateY(-2px); }
+.ambiance-choice.is-selected { background:#fff; border-color:#fff; color:#24336a; box-shadow:0 0 0 2px #95c13b; }
+.ambiance-swatch { width:27px; height:27px; border-radius:50%; background:var(--swatch); flex:none; border:1px solid #ffffff65; }
+.ambiance-choice.is-selected .ambiance-swatch { outline:1px solid #9ea7b8; outline-offset:2px; }
+#ambiance-description { min-height:3.5em; font-size:.87rem; }
+.ambiance-preview { min-width:0; }
+.ambiance-image-wrap { aspect-ratio:1; position:relative; overflow:hidden; border-radius:7px; background:#1b2856; }
+.ambiance-image-wrap img { display:block; width:100%; height:100%; object-fit:cover; }
+.ambiance-preview figcaption { color:#d4deef; font-size:.72rem; line-height:1.6; margin-top:14px; }
+.inspiration-card img { transition:transform .65s cubic-bezier(.2,.7,.2,1); }
+@media(hover:hover) { .inspiration-card:hover img { transform:scale(1.025); } .btn--primary:hover { transform:translateY(-3px); box-shadow:0 8px 20px #16224620; } }
+.french-quality { padding:95px 0; background:var(--fond); }
+.quality-heading { max-width:780px; }
+.quality-heading h2 { margin:14px 0 24px; }
+.quality-heading>p { color:var(--gris); max-width:630px; }
+.quality-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:45px; margin-top:55px; }
+.quality-grid article { border-top:2px solid #95c13b; padding-top:28px; }
+.quality-mark { display:block; font-size:3.3rem; font-weight:600; letter-spacing:-.055em; line-height:1.1; margin-bottom:22px; color:var(--texte); }
+.quality-mark--time { font-size:2.6rem; min-height:58px; display:flex; align-items:center; }
+.quality-grid h3 { margin-bottom:18px; }
+.quality-grid p { color:var(--gris); font-size:.9rem; }
+.quality-grid small { color:var(--gris); display:block; margin-top:14px; font-size:.74rem; line-height:1.6; }
+.quality-rse { margin-top:45px; padding-top:25px; border-top:1px solid var(--gris-clair); color:var(--gris); font-size:.88rem; }
+.services { background:var(--blanc); }
+.faq { background:var(--fond); }
+@media(max-width:1100px) { .nav__links { gap:15px; } .nav__links a { font-size:.8rem; } .nav__logo img,.nav.scrolled .nav__logo img { height:calc(140px - 72px * var(--nav-progress)); } .hero { padding-top:calc(156px - 72px * var(--nav-progress)); } .vr-layout { gap:40px; } .quality-grid { gap:28px; } }
+@media(max-width:767px) {
+ .nav__logo img,.nav.scrolled .nav__logo img { height:calc(100px - 42px * var(--nav-progress)); }
+ .hero,.is-scrubbing .hero { padding-top:116px; }
+ .hero__content { padding-top:26px; }
+ .promise-strip { grid-template-columns:1fr; padding-block:35px; gap:22px; }
+ .promise-strip p { font-size:2.1rem; } .promise-strip span { font-size:1rem; }
+ .vr-experience,.french-quality { padding:64px 0; }
+ .vr-intro { margin-bottom:32px; } .vr-intro>p { font-size:.96rem; }
+ .vr-layout { grid-template-columns:1fr; gap:36px; }
+ .vr-scene { position:relative; top:0; } .vr-scene img { transform:none; }
+ .vr-features article { padding-bottom:22px; margin-bottom:22px; }
+ .vr-features h3 { font-size:1.4rem; }
+ .quality-grid { grid-template-columns:1fr; gap:30px; margin-top:35px; }
+ .quality-mark { font-size:2.8rem; } .quality-mark--time { min-height:0; }
+ .ambiance-choice { font-size:.84rem; padding:13px 10px; gap:10px; }
+ .projection__grid { gap:30px; }
+}
+@media(prefers-reduced-motion:reduce) { .vr-scene img { transform:none; } .ambiance-choice:hover,.inspiration-card:hover img,.btn--primary:hover { transform:none; } }
