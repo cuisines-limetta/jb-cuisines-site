@@ -1,0 +1,46 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {gunzipSync} from 'node:zlib';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+const hash=s=>createHash('sha256').update(s.replace(/\r\n/g,'\n').replace(/^\uFEFF/,'')).digest('hex');
+const digest=b=>createHash('sha256').update(b).digest('hex');
+const {files,before,assets}=JSON.parse(gunzipSync(Buffer.from('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','base64')));
+const root=fs.realpathSync('.'),bundle=path.dirname(fileURLToPath(import.meta.url));
+if(JSON.parse(fs.readFileSync('package.json')).name!=='cuisines-limetta')throw Error('Mauvais dossier : lancer depuis le dossier du site.');
+const safe=n=>{const f=path.resolve(root,n);if(!f.startsWith(root+path.sep))throw Error('Chemin incorrect');for(let p=f;p!==root;p=path.dirname(p))if(fs.existsSync(p)&&fs.lstatSync(p).isSymbolicLink())throw Error('Lien symbolique : '+n);return f};
+for(const [n,text] of Object.entries(files)){
+ const f=safe(n);
+ if(fs.existsSync(f)){const current=hash(fs.readFileSync(f,'utf8'));if(current!==hash(text)&&current!==before[n])throw Error('FICHIER_MODIFIE : '+n+' ; aucune modification effectuée');}
+ else if(before[n])throw Error('FICHIER_ABSENT : '+n);
+}
+for(const a of assets){
+ if(digest(fs.readFileSync(path.join(bundle,a.file)))!==a.sha256)throw Error('Transfert incomplet : '+a.file);
+ const f=safe(a.name);if(fs.existsSync(f)&&digest(fs.readFileSync(f))!==a.sha256)throw Error('MEDIA_MODIFIE : '+a.name);
+}
+for(const n of ['src/ui/visual-editor.js','styles/tunnel.css','src/ui/tunnel.js'])if(!fs.existsSync(safe(n)))throw Error('Installation précédente manquante : '+n);
+if(!process.argv.includes('--apply')){console.log('Contrôles OK : fichiers et vidéo vérifiés, aucune modification.');process.exit(0)}
+const id=Date.now(),backup=safe('.booking-state/vr-'+id),stage=safe('.vr-build-'+id),dist=safe('dist');
+fs.mkdirSync(backup,{recursive:true});
+const manifest=[...Object.keys(files),...assets.map(a=>a.name)].map(name=>({name,exists:fs.existsSync(safe(name))}));
+for(const m of manifest)if(m.exists){const b=path.join(backup,m.name);fs.mkdirSync(path.dirname(b),{recursive:true});fs.copyFileSync(safe(m.name),b)}
+fs.writeFileSync(path.join(backup,'manifest.json'),JSON.stringify(manifest,null,2));
+let moved=false;
+try{
+ for(const [n,text] of Object.entries(files)){fs.mkdirSync(path.dirname(safe(n)),{recursive:true});fs.writeFileSync(safe(n),text)}
+ for(const a of assets){fs.mkdirSync(path.dirname(safe(a.name)),{recursive:true});fs.copyFileSync(path.join(bundle,a.file),safe(a.name))}
+ execFileSync(process.execPath,['--check','src/ui/vr-scroll.js'],{stdio:'inherit'});
+ execFileSync(process.execPath,['node_modules/vite/bin/vite.js','build','--outDir',stage],{stdio:'inherit'});
+ const html=fs.readFileSync(path.join(stage,'index.html'),'utf8');
+ if(!html.includes('vr-scroll-video')||!html.includes('visual-editor-'))throw Error('Compilation incomplète');
+ for(const a of assets)if(digest(fs.readFileSync(path.join(stage,'vr',a.file)))!==a.sha256)throw Error('Média compilé incorrect : '+a.file);
+ if(fs.existsSync(dist)){fs.cpSync(dist,stage,{recursive:true,force:false,errorOnExist:false});fs.renameSync(dist,path.join(backup,'dist'));moved=true}
+ fs.renameSync(stage,dist);
+ console.log('TRANSITION VR PUBLIÉE. Sauvegarde : '+backup);
+ console.log('Actualisez avec Ctrl + F5. Aucun redémarrage nécessaire.');
+}catch(error){
+ for(const m of manifest){if(m.exists)fs.copyFileSync(path.join(backup,m.name),safe(m.name));else if(fs.existsSync(safe(m.name)))fs.unlinkSync(safe(m.name))}
+ if(moved&&!fs.existsSync(dist))fs.renameSync(path.join(backup,'dist'),dist);
+ throw error;
+}
