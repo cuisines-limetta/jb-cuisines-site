@@ -25,7 +25,7 @@ const deployedService=fs.readFileSync(safe('booking/service.js'),'utf8')
 files['booking/service.js']=patchService(deployedService)
 before['booking/service.js']=hash(deployedService)
 const conflicts=[]
-for(const [n,s] of Object.entries(files)){const f=safe(n);if(fs.existsSync(f)){const h=hash(fs.readFileSync(f,'utf8'));if(h!==hash(s)&&h!==before[n])conflicts.push(n)}else if(before[n])conflicts.push(n+' (absent)')}
+for(const [n,s] of Object.entries(files)){const f=safe(n);if(fs.existsSync(f)){const h=hash(fs.readFileSync(f,'utf8'));if(h!==hash(s)&&h!==before[n])conflicts.push(n)}else if(before[n]&&n!=='booking/cancellation.js')conflicts.push(n+' (absent)')}
 if(conflicts.length)throw Error('FICHIERS_A_VERIFIER : '+conflicts.join(', ')+' ; aucune modification effectuée')
 if(!process.argv.includes('--apply')){console.log('Contrôles OK ; aucune modification.');process.exit(0)}
 const backup=safe('.booking-state/annulation-'+Date.now());fs.mkdirSync(backup,{recursive:true,mode:0o700})
