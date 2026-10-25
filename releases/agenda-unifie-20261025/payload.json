@@ -1,0 +1,97 @@
+{
+  "changes": {
+    "booking/confirmation-email.js": [
+      [
+        "import { createOwnerNotifier }",
+        "import { calendarIdentity, calendarEvent } from './calendar-event.js'\nimport { createOwnerNotifier }"
+      ],
+      [
+        "createCalendarLink(data,key,env,created)",
+        "data.calendar?.version === 2 ? undefined : createCalendarLink(data,key,env,created)"
+      ],
+      [
+        "attachments:[{ filename:",
+        "...(data.calendar?.version === 2 ? {icalEvent:calendarEvent(data,key,sender,'REQUEST',created)} : {}),\n    attachments:[{ filename:"
+      ],
+      [
+        "{ filename:'rendez-vous-limetta.ics'",
+        "...(data.calendar?.version === 2 ? [] : [{ filename:'rendez-vous-limetta.ics'"
+      ],
+      [
+        "contentDisposition:'attachment' }],",
+        "contentDisposition:'attachment' }])],"
+      ],
+      [
+        "if (!safeId(key))",
+        "if (env.BOOKINGS_UNIFIED_CALENDAR === 'true') data = {...data, calendar:calendarIdentity(data,mailSender(env))}\n      if (!safeId(key))"
+      ],
+      [
+        "JSON.stringify(data)) return",
+        "JSON.stringify(data)) return data.calendar"
+      ],
+      [
+        "writeFileSync(pending(key),JSON.stringify({ created:now(), data }),{ flag:'wx', mode:0o600 })",
+        "writeFileSync(pending(key),JSON.stringify({ created:now(), data }),{ flag:'wx', mode:0o600 })\n      return data.calendar"
+      ]
+    ],
+    "booking/service.js": [
+      [
+        "        if (mailer) {\n          if (policy.",
+        "        let calendar\n        if (mailer) {\n          if (policy."
+      ],
+      [
+        "await mailer.prepare(body.requestId",
+        "calendar = await mailer.prepare(body.requestId"
+      ],
+      [
+        "{ fingerprint, staffId: slot.staffId",
+        "{ ...(calendar ? {calendar} : {}), fingerprint, staffId: slot.staffId"
+      ]
+    ],
+    "booking/cancellation.js": [
+      [
+        "return {name:a.customers[0].name",
+        "return {calendar:r.calendar,address:a.serviceLocation?.displayName||a.customers[0].location?.displayName||'À votre domicile',name:a.customers[0].name"
+      ]
+    ],
+    "booking/cancellation-email.js": [
+      [
+        "import fs from 'node:fs'",
+        "import {calendarEvent} from './calendar-event.js'\nimport fs from 'node:fs'"
+      ],
+      [
+        "function message(key,data,reason){return {",
+        "function message(key,data,reason){return {...(data.calendar?.version===2?{icalEvent:calendarEvent(data,key,mailSender(env),'CANCEL',now())}:{}),"
+      ]
+    ],
+    "booking/cancellation-template.js": [
+      [
+        "  return mail",
+        "  if(data.calendar?.version===2){\n    const note='Ce mail contient l’annulation de votre invitation. Selon votre application, une validation peut être nécessaire pour mettre votre agenda à jour.'\n    mail.html=mail.html.replace('Si vous aviez ajouté ce rendez-vous à votre agenda personnel, pensez à le retirer.',note)\n    mail.text+='\\n\\n'+note\n  }\n  return mail"
+      ]
+    ],
+    "booking/reminders.js": [
+      [
+        "return { name:c.name",
+        "return { calendar:record.calendar, name:c.name"
+      ],
+      [
+        "createCalendarLink(data,byId.get(a.id).requestId,env,byId.get(a.id).updated)",
+        "data.calendar?.version===2?undefined:createCalendarLink(data,byId.get(a.id).requestId,env,byId.get(a.id).updated)"
+      ]
+    ],
+    "booking/email-template.js": [
+      [
+        "  return { subject, text: text +",
+        "  const invitationNote = 'Acceptez l’invitation incluse dans cet e-mail pour retrouver notre rendez-vous dans votre agenda.'\n  const finalHtml = data.calendar?.version === 2 ? html.replace('Le fichier joint vous permet d’ajouter ce rendez-vous à votre calendrier.',invitationNote) : html\n  const finalText = data.calendar?.version === 2 ? text.replace('Le fichier joint vous permet d’ajouter le rendez-vous à votre calendrier.',invitationNote) : text\n  return { subject, text: finalText +"
+      ],
+      [
+        " : ''), html }",
+        " : ''), html:finalHtml }"
+      ]
+    ]
+  },
+  "files": {
+    "booking/calendar-event.js": "import { createHash } from 'node:crypto'\nimport { calendarAttachment } from './email-template.js'\nconst email = value => { if(!/^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/.test(value||'')) throw Error('CALENDAR_EMAIL_INVALID'); return value.toLowerCase() }\nconst fingerprint = d => createHash('sha256').update(JSON.stringify([email(d.email),+new Date(d.start),+new Date(d.end)])).digest('hex')\nexport function calendarIdentity(data, sender) {\n  if(!Number.isFinite(+new Date(data.start)) || !(new Date(data.end)>new Date(data.start))) throw Error('CALENDAR_DATE_INVALID')\n  return {version:2, organizer:email(sender), fingerprint:fingerprint(data)}\n}\nexport function calendarEvent(data,key,sender,method='REQUEST',created=Date.now()) {\n  const identity=data.calendar\n  if(!['REQUEST','CANCEL'].includes(method)||identity?.version!==2||identity.organizer!==email(sender)||identity.fingerprint!==fingerprint(data)) throw Error('CALENDAR_IDENTITY_CHANGED')\n  const content=calendarAttachment(data,key,created)\n    .replace('METHOD:PUBLISH','METHOD:'+method)\n    .replace('BEGIN:VEVENT','BEGIN:VEVENT\\r\\nORGANIZER:mailto:'+identity.organizer+'\\r\\nATTENDEE;RSVP=FALSE:mailto:'+email(data.email)+'\\r\\nSEQUENCE:'+(method==='CANCEL'?1:0))\n    .replace('STATUS:CONFIRMED',method==='CANCEL'?'STATUS:CANCELLED':'STATUS:CONFIRMED')\n  // Fold every UTF-8 content line, including long email addresses.\n  const folded=content.replace(/\\r\\n /g,'').split('\\r\\n').map(line=>{let out='',part='';for(const c of line){if(Buffer.byteLength(part+c)>75){out+=part+'\\r\\n';part=' '}part+=c}return out+part}).join('\\r\\n')\n  return {method,filename:method==='CANCEL'?'annulation-limetta.ics':'rendez-vous-limetta.ics',content:folded}\n}\n"
+  }
+}
