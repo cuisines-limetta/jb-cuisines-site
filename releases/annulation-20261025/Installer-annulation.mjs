@@ -3,6 +3,7 @@ import path from 'node:path'
 import {createHash} from 'node:crypto'
 import {execFileSync} from 'node:child_process'
 import {createRequire} from 'node:module'
+import {patchGraph} from './patch-graph.mjs'
 const {files,before}=JSON.parse(fs.readFileSync(new URL('./payload.json',import.meta.url)))
 const root=fs.realpathSync('.')
 const hash=s=>createHash('sha256').update(s.replace(/\r\n/g,'\n').replace(/^\uFEFF/,'')).digest('hex')
@@ -16,6 +17,9 @@ if(process.env.BOOKINGS_OWNER_MANAGEMENT && process.env.BOOKINGS_OWNER_MANAGEMEN
 const owner=env.BOOKINGS_OWNER_EMAIL || JSON.parse(fs.readFileSync(safe('content.json'))).site.emailContact
 if(!/^[^\s@<>]+@cuisines-limetta\.com$/i.test(owner||''))throw Error('Adresse de gestion Limetta incorrecte')
 const updatedEnv=originalEnv.replace(/^\s*(?:export\s+)?BOOKINGS_OWNER_MANAGEMENT\s*=.*(?:\r?\n|$)/gm,'').replace(/\s*$/,'')+'\nBOOKINGS_OWNER_MANAGEMENT=true\n'
+const deployedGraph=fs.readFileSync(safe('booking/graph.js'),'utf8')
+files['booking/graph.js']=patchGraph(deployedGraph)
+before['booking/graph.js']=hash(deployedGraph)
 for(const [n,s] of Object.entries(files)){const f=safe(n);if(fs.existsSync(f)){const h=hash(fs.readFileSync(f,'utf8'));if(h!==hash(s)&&h!==before[n])throw Error('FICHIER_MODIFIE : '+n+' ; aucune modification effectuée')}else if(before[n])throw Error('FICHIER_ABSENT : '+n)}
 if(!process.argv.includes('--apply')){console.log('Contrôles OK ; aucune modification.');process.exit(0)}
 const backup=safe('.booking-state/annulation-'+Date.now());fs.mkdirSync(backup,{recursive:true,mode:0o700})
