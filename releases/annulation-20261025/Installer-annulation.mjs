@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto'
 import {execFileSync} from 'node:child_process'
 import {createRequire} from 'node:module'
 import {patchGraph} from './patch-graph.mjs'
+import {patchService} from './patch-service.mjs'
 const {files,before}=JSON.parse(fs.readFileSync(new URL('./payload.json',import.meta.url)))
 const root=fs.realpathSync('.')
 const hash=s=>createHash('sha256').update(s.replace(/\r\n/g,'\n').replace(/^\uFEFF/,'')).digest('hex')
@@ -20,7 +21,12 @@ const updatedEnv=originalEnv.replace(/^\s*(?:export\s+)?BOOKINGS_OWNER_MANAGEMEN
 const deployedGraph=fs.readFileSync(safe('booking/graph.js'),'utf8')
 files['booking/graph.js']=patchGraph(deployedGraph)
 before['booking/graph.js']=hash(deployedGraph)
-for(const [n,s] of Object.entries(files)){const f=safe(n);if(fs.existsSync(f)){const h=hash(fs.readFileSync(f,'utf8'));if(h!==hash(s)&&h!==before[n])throw Error('FICHIER_MODIFIE : '+n+' ; aucune modification effectuée')}else if(before[n])throw Error('FICHIER_ABSENT : '+n)}
+const deployedService=fs.readFileSync(safe('booking/service.js'),'utf8')
+files['booking/service.js']=patchService(deployedService)
+before['booking/service.js']=hash(deployedService)
+const conflicts=[]
+for(const [n,s] of Object.entries(files)){const f=safe(n);if(fs.existsSync(f)){const h=hash(fs.readFileSync(f,'utf8'));if(h!==hash(s)&&h!==before[n])conflicts.push(n)}else if(before[n])conflicts.push(n+' (absent)')}
+if(conflicts.length)throw Error('FICHIERS_A_VERIFIER : '+conflicts.join(', ')+' ; aucune modification effectuée')
 if(!process.argv.includes('--apply')){console.log('Contrôles OK ; aucune modification.');process.exit(0)}
 const backup=safe('.booking-state/annulation-'+Date.now());fs.mkdirSync(backup,{recursive:true,mode:0o700})
 const manifest=Object.keys(files).map(name=>({name,exists:fs.existsSync(safe(name))}))
