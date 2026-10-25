@@ -1,0 +1,45 @@
+{
+  "changes": [
+    [
+      "rendez-vous.html",
+      "<p class=\"hint\">Étude 3D et devis gratuits, sans engagement.</p>",
+      "<p class=\"hint\">Étude 3D et devis gratuits, sans engagement.</p>\n      <p class=\"booking-ready\">Pas besoin d’avoir déjà un plan ou des idées précises : nous construisons votre projet ensemble.</p>"
+    ],
+    [
+      "rendez-vous.html",
+      "          <p id=\"booking-status\"",
+      "          <p id=\"booking-range\" class=\"booking-range\" aria-live=\"polite\" aria-atomic=\"true\"></p>\n          <p id=\"booking-status\""
+    ],
+    [
+      "rendez-vous.html",
+      "          <button type=\"button\" id=\"booking-next\">Voir les 7 jours suivants</button>",
+      "          <nav class=\"booking-week-nav\" aria-label=\"Période des disponibilités\">\n            <button type=\"button\" id=\"booking-previous\" disabled>Jours précédents</button>\n            <button type=\"button\" id=\"booking-next\">7 jours suivants</button>\n          </nav>"
+    ],
+    [
+      "rendez-vous.html",
+      "          <button type=\"button\" id=\"booking-retry\" hidden>Réessayer la recherche</button>",
+      "          <button type=\"button\" id=\"booking-retry\" hidden>Réessayer la recherche</button>\n          <div class=\"booking-slot-contact\"><p>Aucun créneau ne vous convient ? Contactez-moi.</p><a href=\"tel:+33767012102\">Appelez-moi</a><a href=\"mailto:j.bayonas@cuisines-limetta.com\">Écrivez-moi</a></div>"
+    ],
+    [
+      "src/ui/slot-picker.js",
+      "  const retry = document.querySelector('#booking-retry')",
+      "  const retry = document.querySelector('#booking-retry')\n  const previous = document.querySelector('#booking-previous')\n  const range = document.querySelector('#booking-range')"
+    ],
+    [
+      "src/ui/slot-picker.js",
+      "    next.disabled = busy || locked",
+      "    next.disabled = busy || locked\n    previous.disabled = busy || locked || !date.value || !date.validity.valid || date.value <= date.min"
+    ],
+    [
+      "src/ui/slot-picker.js",
+      "    const start = date.value",
+      "    const start = date.value\n    range.textContent = start && date.validity.valid ? `Du ${dayLabel.format(new Date(`${start}T12:00:00Z`))} au ${dayLabel.format(new Date(`${addDays(start, 6)}T12:00:00Z`))}` : ''"
+    ],
+    [
+      "src/ui/slot-picker.js",
+      "  next.addEventListener('click', () => { date.value = addDays(date.value || date.min, 7); load() })",
+      "  previous.addEventListener('click', () => {\n    if (busy || locked || !date.value || !date.validity.valid || date.value <= date.min) return\n    const target = addDays(date.value, -7)\n    date.value = target < date.min ? date.min : target\n    load()\n  })\n  next.addEventListener('click', () => {\n    if (busy || locked) return\n    date.value = addDays(date.value || date.min, 7)\n    load()\n  })"
+    ]
+  ],
+  "css": "/* Navigation et aide à la recherche de créneaux. */\n.booking-ready{max-width:680px;font-size:14px;line-height:1.7;color:#4f5570}\n.booking-range{font-size:14px;font-weight:600;line-height:1.6;margin:20px 0 12px;font-variant-numeric:tabular-nums}\n.booking-week-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:22px}\n.booking-card .booking-week-nav button{margin:0;width:100%;min-height:48px;padding:12px 8px;font-size:14px;background:#edf3df;color:#24336a}\n.booking-card .booking-week-nav #booking-next{margin-top:0}\n.booking-slot-contact{border-top:1px solid #24336a20;margin-top:24px;padding-top:16px;font-size:14px;line-height:1.6}\n.booking-slot-contact p{margin:0 0 4px;color:#4f5570}\n.booking-slot-contact a{display:inline-flex;align-items:center;min-height:44px;margin-right:20px}"
+}
