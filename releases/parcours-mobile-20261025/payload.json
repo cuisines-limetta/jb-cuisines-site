@@ -1,0 +1,45 @@
+{
+  "changes": [
+    [
+      "index.html",
+      "<dd>1 à 2 heures</dd>",
+      "<dd>Prévoyez environ 2 heures</dd>"
+    ],
+    [
+      "rendez-vous.html",
+      "Durée : 2 heures",
+      "Prévoyez environ 2 heures"
+    ],
+    [
+      "rendez-vous.html",
+      "Heure de Paris · Rendez-vous de 2 heures",
+      "Heure de Paris · Prévoyez environ 2 heures"
+    ],
+    [
+      "rendez-vous.html",
+      "<h3>2. Faisons connaissance</h3>",
+      "<h3 id=\"booking-form-title\" tabindex=\"-1\">2. Faisons connaissance</h3>"
+    ],
+    [
+      "src/ui/booking.js",
+      "  onSelect(slot) {",
+      "  onSelect(slot, { keyboard = false } = {}) {"
+    ],
+    [
+      "src/ui/booking.js",
+      "    if (slot) trackConversion('slot_selected', {location:'reservation'})",
+      "    if (slot) {\n      trackConversion('slot_selected', {location:'reservation'})\n      if (globalThis.matchMedia?.('(max-width: 760px)').matches) {\n        document.querySelector('#booking-form-title').focus({ preventScroll: true })\n        const reduced = globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches\n        form.scrollIntoView({ block: 'start', behavior: reduced || keyboard ? 'instant' : 'smooth' })\n      }\n    }"
+    ],
+    [
+      "src/ui/slot-picker.js",
+      "        button.addEventListener('click', () => {\n          if (locked) return",
+      "        button.addEventListener('click', event => {\n          if (locked) return"
+    ],
+    [
+      "src/ui/slot-picker.js",
+      "          onSelect(slot)",
+      "          onSelect(slot, { keyboard: event.detail === 0 })"
+    ]
+  ],
+  "css": "#booking-form{scroll-margin-top:24px}"
+}
