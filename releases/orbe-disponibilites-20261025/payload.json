@@ -1,0 +1,35 @@
+{
+  "rules": {
+    "src/ui/booking-orb.js": [
+      [
+        "export function createBookingOrb(button, form) {",
+        "export function createBookingOrb(button, form, message = 'Confirmation en cours…') {"
+      ],
+      [
+        "label.textContent = 'Confirmation en cours…'",
+        "label.textContent = message"
+      ]
+    ],
+    "src/ui/booking.js": [
+      [
+        "const picker = initSlotPicker({ date, slots, status,",
+        "const picker = initSlotPicker({ date, slots, status,\n  loadingIndicator: createBookingOrb(status, slots, 'recherche des disponibilités'),"
+      ]
+    ],
+    "src/ui/slot-picker.js": [
+      [
+        "export function initSlotPicker({ date, slots, status, onSelect }) {",
+        "export function initSlotPicker({ date, slots, status, onSelect, loadingIndicator }) {"
+      ],
+      [
+        "  let period = 'all'",
+        "  let showingLoader = false\n  let period = 'all'"
+      ],
+      [
+        "    if (busy) status.textContent = count ? 'Créneaux disponibles ci-dessous. Recherche des jours suivants…' : 'Recherche des prochains créneaux…'\n    else status.textContent = count ? 'Choisissez votre créneau ci-dessous.' : 'Aucun créneau pour ce filtre sur ces 7 jours. Changez de filtre ou consultez les jours suivants.'",
+        "    if (busy) {\n      if (!showingLoader) {\n        status.textContent = 'recherche des disponibilités'\n        loadingIndicator?.start()\n        showingLoader = true\n      }\n    } else {\n      if (showingLoader) { loadingIndicator?.stop(); showingLoader = false }\n      status.textContent = count ? 'Choisissez votre créneau ci-dessous.' : 'Aucun créneau pour ce filtre sur ces 7 jours. Changez de filtre ou consultez les jours suivants.'\n    }"
+      ]
+    ]
+  },
+  "css": "/* LIMETTA_AVAILABILITY_ORB_V1 */\n#booking-status.is-booking{display:flex;align-items:center;gap:12px;min-height:64px;color:#24336a}\n#booking-status.is-booking span{line-height:1.5}\n@media(max-width:380px){#booking-status.is-booking{gap:8px}}\n"
+}
