@@ -1,0 +1,1 @@
+export function transform(read,p){let html=read('rendez-vous.html');if(!html.includes(p.after)){if(html.split(p.before).length!==2)throw Error('Phrase différente : aucune modification effectuée');html=html.replace(p.before,p.after)}return {'rendez-vous.html':html}}
