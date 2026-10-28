@@ -1,0 +1,1 @@
+export function transform(read,p){const files={};for(const [name,before,after] of p.changes){const old=read(name).trim();if(old!==before&&old!==after)throw Error('Fichier modifié : '+name+' ; aucune modification effectuée');files[name]=after+'\n'}return files}
