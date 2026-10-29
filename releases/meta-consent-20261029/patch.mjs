@@ -1,9 +1,22 @@
 import {createHash} from 'node:crypto'
 const norm=s=>s.replaceAll('\r\n','\n').trim()
+export function patchBookingService(source){
+  let s=source.replaceAll('\r\n','\n')
+  function one(a,b){if(s.includes(b))return;if(s.split(a).length!==2)throw Error('STRUCTURE_INATTENDUE : booking/service.js ; aucune modification effectuée');s=s.replace(a,b)}
+  // Only add attribution metadata. Keep the installed calendar, mail and Graph settings.
+  for(const line of ["import { cleanChoice } from '../src/utils/privacy-choice.js'", "import { acquisitionDraft } from './acquisition.js'", "import { randomUUID as createAdvertisingId } from 'node:crypto'"])if(!s.includes(line))s=line+'\n'+s
+  one('      const selected = unseal(body.slotId)', '      const advertisingConsent = cleanChoice(body.advertisingConsent, now())\n      const selected = unseal(body.slotId)')
+  one("if (previous.state === 'confirmed') return { confirmed: true, start: new Date(selected.start).toISOString() }", "if (previous.state === 'confirmed') return { confirmed: true, start: new Date(selected.start).toISOString(), ...(advertisingConsent?.advertising && previous.advertisingConsent?.advertising && previous.advertisingEventId ? { advertisingEventId: previous.advertisingEventId } : {}) }")
+  if(!s.includes('acquisition: acquisitionDraft(body, customer, slot.start, now()),'))one('tx.reserve(body.requestId, {','tx.reserve(body.requestId, { acquisition: acquisitionDraft(body, customer, slot.start, now()),')
+  one('        tx.reserve(body.requestId, {','        const advertisingEventId = createAdvertisingId()\n        tx.reserve(body.requestId, { advertisingEventId, advertisingConsent: advertisingConsent?.advertising ? advertisingConsent : null,')
+  one('return { confirmed: true, start: new Date(slot.start).toISOString() }','return { confirmed: true, start: new Date(slot.start).toISOString(), ...(advertisingConsent?.advertising ? { advertisingEventId } : {}) }')
+  return s
+}
 export function transform(read,p){
   const files={}
   for(const [n,s] of Object.entries(p.files)){
     const old=norm(read(n,true)),hash=createHash('sha256').update(old).digest('hex')
+    if(n==='booking/service.js'&&old!==norm(s)){files[n]=patchBookingService(old)+'\n';continue}
     if(old!==norm(s)&&!p.before[n].includes(old===''?'':hash))throw Error('FICHIER_MODIFIE : '+n+' ; aucune modification effectuée')
     files[n]=s+'\n'
   }
